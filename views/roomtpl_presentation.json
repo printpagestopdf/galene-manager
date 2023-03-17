@@ -1,0 +1,17 @@
+{
+    "id": "-1",
+    "key64": "*** to be generated ***",
+    "access": "code",
+	"auth_for_operator": true,
+	"auth_for_presentator": true,
+	"needs_nickname": true,
+	"needs_code": true,
+    "attrs": "{\"allow_anonymous\":false,\"allow_subgroups\":false,\"autolock\":false,\"allow_recording\":true,\"max_clients\":\"0\"}",
+    "allow_anonymous": false,
+    "allow_subgroups": false,
+    "autolock": false,
+    "allow_recording": true,
+	"auth_for_presentator": true,
+	"auth_for_operator": true,
+    "max_clients": "0"
+}

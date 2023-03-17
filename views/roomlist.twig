@@ -1,0 +1,53 @@
+{% extends main.twig %}
+
+{% block content %}
+<nav class="panel">
+  <div class="panel-heading">
+    <div class="is-hidden-tablet">{{ __("Public rooms",'galene-mgr') }}</div>
+
+		<div class="columns is-size-6 is-hidden-mobile" >
+			<div class="column  is-cursor-default">
+					{{__("Room",'galene-mgr') }}
+			</div>
+			<div class="column  is-cursor-default">
+				{{ __("Description",'galene-mgr') }}
+			</div>
+			<div class="column has-text-centered is-cursor-default is-multiline is-one-third-desktop is-one-fifth-tablet">
+				{{ __("Access room as ...",'galene-mgr') }}
+			</div>
+		</div>
+	
+	</div>
+  
+
+  {% foreach($rooms as $room): %}
+  <label class="panel-block is-block is-active">
+	  <div class="columns" >
+		  <div class="column  is-cursor-default">
+				{{ $room->displayName }}
+		  </div>
+		  <div class="column  is-cursor-default is-size-7">
+			{{ $room->description }}
+		  </div>
+		  <div class="column columns is-multiline is-one-third-desktop is-one-fifth-tablet">
+			  <div class="column  py-1-mobile">
+				  <a class="is-underlined" href='{{ $room->urls['recipient'] }}' >
+					{{ __("Listener",'galene-mgr') }}
+				  </a>			  
+			  </div>
+			  <div class="column py-1-mobile">
+				  <a class="is-underlined" href='{{ $room->urls['presenter'] }}' >
+					{{ __("Presenter",'galene-mgr') }}
+				  </a>			  			  
+			  </div>
+			  <div class="column py-1-mobile">
+				  <a class="is-underlined" href='{{ $room->urls['admin'] }}' >
+					{{ __("Operator",'galene-mgr') }}
+				  </a>			  			  
+			  </div>
+		  </div>
+	  </div>
+</label>  
+  {% endforeach; %}
+</nav>
+{% endblock %}

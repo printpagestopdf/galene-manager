@@ -1,0 +1,47 @@
+{% extends main.twig %}
+
+{% block content %}
+<nav class="panel">
+	<p class="panel-heading">
+		{{ sprintf( __("Enter Room '%1s' as '%2s'",'galene-mgr') ,$room->displayName,$d['g_type_disp']) }}
+	</p>
+
+	<form method="POST" class="box is-flex-grow-1">
+		{% wp_nonce_field("access_room","gal_form_id",false,true) %}
+		<input type="hidden" name='galene_action' value="access_room" >
+		<input type="hidden" name='galene_room' value="{{ $room->id }}" >
+		{% if(in_array('name',$parts)): %}
+		<div class="field">
+			{% if(in_array('code',$parts)): %}
+			<label class="label">{{ __("Displayname",'galene-mgr') }}</label>
+			{% else: %}
+			<label class="label">{{ __("Login",'galene-mgr') }}</label>
+			{% endif; %}
+			<div class="control">
+				<input class="input" type="text" name="galene_login" id="galene_login" required="required" value="{{ @$d['galene_login'] }}">
+			</div>
+		</div>
+		{% endif; %}
+		{% if(in_array('code',$parts)): %}
+		<div class="field">
+			<label class="label">{{ __("Code",'galene-mgr') }}</label>
+			<div class="control">
+				<input class="input" type="text" name="galene_code" id="galene_code" required="required"  value="{{ @$d['galene_code'] }}">
+			</div>
+		</div>
+		{% endif; %}
+		{% if(in_array('password',$parts)): %}
+		<div class="field">
+			<label class="label">{{ __("Password",'galene-mgr') }}</label>
+			<div class="control">
+				<input class="input" type="password" name="galene_password" id="galene_password" required="required"  value="{{ @$d['galene_password'] }}">
+			</div>
+		</div>
+		{% endif; %}
+		<div class="field">
+			<button class="button is-info" type="submit">{{ __("Next",'galene-mgr') }}</button>
+		</div>
+	</form>
+
+</nav>
+{% endblock %}

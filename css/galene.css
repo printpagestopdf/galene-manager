@@ -1,0 +1,124 @@
+
+html { overflow-y: auto; }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+ul.inside { list-style: inside; }
+
+input[type=checkbox].hide-descendant:checked + label + .descendant-to-hide,
+input[type=radio].hide-descendant:checked + label + .descendant-to-hide{
+	display: inherit;
+}
+
+input[type=checkbox].hide-descendant:not(:checked) + label + .descendant-to-hide,
+input[type=radio].hide-descendant:not(:checked) + label + .descendant-to-hide{
+	display: none;
+
+}
+
+.import-srv-json input[type=file] { display: none; }
+
+/* .key_file_upload { display: initial; } */
+
+/* #sftp_auth_mode_key:not(:checked) + label + .key_file_upload { */
+	/* display: none; */
+/* } */
+
+.is-cursor-default { cursor: default; }
+.is-cursor-pointer { cursor: pointer; }
+
+button.image-button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.vertical-centered { vertical-align: middle; }
+
+input.hide-unchecked + label + div {display: none;}
+input.hide-unchecked:checked + label + div {display: block;}
+
+.is-rounded { border-radius: 4px; }
+
+.is-checkmark { position: relative; }
+.is-checkmark > *:first-child {
+	box-sizing: border-box;
+	transform: translateY(0) rotate(45deg);
+	border-width: .15rem;
+	border-style: solid;
+	border-color: #00d1b2;
+	border-top: 0;
+	border-left: 0;
+	width: .475rem;
+	height: .8rem;
+	top: .405rem;
+	left: .6rem;
+	position: absolute;	
+}
+
+.preloader { display: none; }
+
+.is-loading.preloader {
+  align-items: center;
+  background: rgba(23, 22, 22, 0.32);
+  display: flex;
+	max-width: unset;
+	max-height: unset;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s linear;
+  width: 100%;
+  z-index: 9999;
+}
+
+/* form.room-edit .fld-access-code { display: none; } */
+/* form.room-edit.is-access-code .fld-access-code { display: block; } */
+
+.is-checkradio[type="checkbox"].has-background-color + label::before, .is-checkradio[type="checkbox"].has-background-color + label::before {
+  border-color: transparent !important;
+  background-color: white !important;
+}
+
+.accordion .a-container.active .navbar-link:after{
+	transform: rotate(135deg);
+}
+
+.accordion .a-container:not(.active) .navbar-link:after{
+	transform: rotate(-45deg);
+}
+
+.text-vertical {
+	writing-mode: vertical-lr;
+	
+}
+
+.table th.text-bottom { vertical-align: bottom;	}
+
+th.is-size-7 {width: 2.5rem; }
+
+.modal.is-large-modal .modal-card .modal-card-body {padding: 0; }
+.modal.is-large-modal .modal-card { width: calc(100vw - 4rem); max-height: unset; height: calc(100vh - 4rem);}
+.modal.is-large-modal .modal-card iframe { width: 100%; height: 100%; display: block; }
+
+@media screen and (max-width:450px) {
+   /* Zusätzliche Regeln noch kleinere Monitore  */
+   .tab-content { margin-left: 0 !important; margin-right: 0 !important; } 
+   section.section { padding-right: 0.5rem; padding-left: 0.5rem; }
+}
+
+@media screen and (max-width: 768px) {
+  .py-1-mobile { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+}

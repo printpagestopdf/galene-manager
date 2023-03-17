@@ -1,0 +1,76 @@
+
+<section>
+<nav class="navbar mb-3" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+	  <div href='#' class="navbar-item">
+	  <a class="navbar-item" href="{% echo get_permalink() %}" >
+		  <img  src="{% echo GALENE_PLUGIN_URL . '/assets/videocall-pngrepo-com.png'; %}" >
+		  </a>
+		</div>
+	<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main_menu">
+	  <span aria-hidden="true"></span>
+	  <span aria-hidden="true"></span>
+	  <span aria-hidden="true"></span>
+	</a>
+
+  </div>
+  <div id="main_menu" class="navbar-menu">
+    <div class="navbar-start">
+		{% if( @$is_admin === true): %}
+      <a class="navbar-item is-tab {{ @$d['admin_screen_roomsettings'] }}" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_roomsettings' ]) %}">
+        {{ __("Room settings",'galene-mgr') }}
+      </a>
+      <a class="navbar-item is-tab {{ @$d['admin_screen_usersettings'] }}" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_usersettings' ]) %}">
+        {{ __("Users",'galene-mgr') }}
+      </a>
+      <a class="navbar-item is-tab {{ @$d['admin_screen_roommgr'] }}" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_settings' ]) %}">
+        {{ __("System settings",'galene-mgr') }}
+      </a>
+
+	    {% else: %}
+		  <a class="navbar-item" href="{% echo get_permalink() %}" >
+			{{ __("Rooms",'galene-mgr') }}
+		  </a>
+	    {% endif; %}
+       </div>
+   </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">		  
+		{% if( @$is_admin === true): %}
+          <a class="button is-light" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_action_logout' ]) %}" >
+            {{ __("Logout",'galene-mgr') }}
+          </a>
+	    {% else: %}
+          <a class="button is-light"  href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_roomsettings' ]) %}" >
+            {{ __("Administration",'galene-mgr') }}
+          </a>
+	    {% endif; %}
+        </div>
+      </div>
+    </div>
+
+</nav>
+
+
+
+{% if(is_array(@$d['msg'])): foreach($d['msg'] as $m): %}
+
+<article class="message autohide is-small {{ $m['type'] }}">
+  <div class="message-header is-rounded">
+    <div>{{ $m['title'] }}</div>
+    <button class="delete" type="button" aria-label="delete"></button>
+  </div>
+</article>
+
+{% endforeach; endif; %}
+
+
+{% yield content %}
+
+</section>
+
+<div class="preloader">
+  <img src="{% echo GALENE_PLUGIN_URL . '/assets/spinner.svg'; %}" alt="spinner">
+</div>
