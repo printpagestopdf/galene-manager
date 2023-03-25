@@ -4,7 +4,7 @@ require_once GALENE_PLUGIN_PATH . 'includes/class-gal-view-generator.php';
 require_once GALENE_PLUGIN_PATH . 'includes/class-gal-settings.php';
 require_once GALENE_PLUGIN_PATH . 'includes/class-gal-server.php';
 require_once GALENE_PLUGIN_PATH . 'includes/class-gal-room.php';
-require_once GALENDE_DB_DRIVER;
+require_once GALENE_DB_DRIVER;
 
 
 use phpseclib3\Net\SFTP;
@@ -563,7 +563,7 @@ HEAD;
 			}			
 		}
 
-		if(strpos(@$req_args['galene_action'], 'admin_') === 0) return $this->galene_admin_main($req_args);
+		if(strpos(@$req_args['galene_action']?:'', 'admin_') === 0) return $this->galene_admin_main($req_args);
 		
 		switch(@$req_args['galene_action'])
 		{			
@@ -599,10 +599,10 @@ HEAD;
 				$nickname=(empty(@$room->needs_nickname) && empty(@$content))?Gal_util::random_name():@$content;
 				
 				$room_auth=Gal_util::get_room_auth_link(
-					$settings['general']['galene_url'] . $room->galene_group . "/",
-					// ['allow_anonymous' => true, 'permissions' => [ 'other' ] ],
+					trailingslashit(trailingslashit($settings['general']['galene_url']) . $room->galene_group),
 					['sub' => $nickname, 'permissions' => $perms ],
-					$room->key64	);
+					$room->key64, $settings	);
+				
 				ob_end_clean();
 				wp_redirect($room_auth,303);
 				exit;

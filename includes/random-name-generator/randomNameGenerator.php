@@ -5,6 +5,7 @@ class randomNameGenerator {
 	private $version;
 	public $allowedFormats;
 	public $inputFormat;
+	public $output;
 
 	public function __construct( $output = 'array' ) {
 
@@ -39,7 +40,7 @@ class randomNameGenerator {
 		$name_r = array();
 
 		foreach( $count as $name ) {
-				$count++;
+				//$count++;
 				$random_fname_index = array_rand( $first_names );
 				$random_lname_index = array_rand( $last_names );
 

@@ -131,15 +131,6 @@ class Gal_DB_Driver {
 	protected function get_record_by_id($_table,$id)
 	{
 		return $this->get_record($_table,["id", "=", $id]);
-		global $wpdb;
-		// $table=$wpdb->prefix . $_table;
-		
-		$ret = $wpdb->get_row( self::_fetch_sql( $id,$_table ),ARRAY_A );
-		
-		if($ret == null || !is_array($ret) || count($ret) == 0)
-			return false;
-		else
-			return $ret;
 	}
 	
 	protected function get_record($_table,$where)
@@ -451,7 +442,7 @@ SQL;
 		
 	}
 	
-	private static function _fetch_sql( $_table="galene_room",$where ) {
+	private static function _fetch_sql( $_table,$where ) {
 		global $wpdb;
 		$table= $wpdb->prefix . $_table;
 		$value=$where[2];

@@ -118,21 +118,20 @@ class Gal_util {
 		
 	}
 
-	public static function get_room_auth_link($roomUrl,$payload, $secret64)
+	public static function get_room_auth_link($roomUrl,$payload, $secret64, $settings)
 	{
 		$payload += [
 			'aud' => $roomUrl,
-			// 'iat' => time() - 20,
-			'exp' => time() + 3600,
-			// 'iss' => 'https://auth.example.org',
+			'iat' => time() - (int)@$settings['general']['galene_issued_at']?:0,
+			'exp' => time() + (int)@$settings['general']['galene_token_exp']?:30,
+			'iss' => get_home_url(),
 			];
 		
 		$secret=self::base64url_decode($secret64);
 		$token=self::simple_token(['typ' => 'JWT', 'alg' => 'HS256', 'kid' => GALENE_ROOM_AUTH_KID ],$payload,$secret);	
 		
 		return $roomUrl . "?token=" . $token;
-	}
-		
+	}		
 
 	public static function generate_jwt()
 	{

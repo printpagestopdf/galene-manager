@@ -1,6 +1,6 @@
 <?php
 require_once GALENE_PLUGIN_PATH . 'includes/class-gal-util.php';
-require_once GALENDE_DB_DRIVER;
+require_once GALENE_DB_DRIVER;
 
 class Gal_Room
 {

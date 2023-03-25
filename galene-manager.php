@@ -50,7 +50,7 @@ require_once 'includes/class-gal-util.php';
 define( 'GALENE_PLUGIN_VERSION', 0.5 );
 define( 'GALENE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GALENE_PLUGIN_URL', plugins_url('', __FILE__ ) );
-define( 'GALENDE_DB_DRIVER', GALENE_PLUGIN_PATH. 'includes/class-gal-db-driver.php');
+define( 'GALENE_DB_DRIVER', GALENE_PLUGIN_PATH. 'includes/class-gal-db-driver.php');
 define( 'GALENE_DEF_BFK','WGVTmmsVy,ylh3jqnQqhu*9W/bHq#/TP');
 define( 'GALENE_WP_ROLE_TYPE',1);
 define( 'GALENE_WP_ROLE_NAME','galene_mgr');
@@ -127,7 +127,7 @@ register_activation_hook( __FILE__, function() {
 	//Add WP galene admin Role
 	add_role(GALENE_WP_ROLE_NAME,GALENE_WP_ROLE_DISPLAYNAME);
 
-	require_once GALENDE_DB_DRIVER;
+	require_once GALENE_DB_DRIVER;
 
 	/* install app admin if no users exists */
 	if(count(Gal_DB_Driver::inst()->get_users()) == 0) {
@@ -149,7 +149,7 @@ add_action('init', function() {
 	// switch_to_locale('en_US');
 	load_plugin_textdomain( 'galene-mgr', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	
-	if(strpos(@$_REQUEST['galene_action'], 'admin_') === 0) {
+	if(strpos(@$_REQUEST['galene_action']?:'', 'admin_') === 0) {
 		session_name("PHPSESSID_GALENE");
 		if (session_status() === PHP_SESSION_NONE ) {			
 			session_start();
@@ -168,7 +168,7 @@ add_action('init', function() {
 
 
 	add_action('update_option_' . wp_roles()->role_key,function($old_value,  $value,  $option){
-		require_once GALENDE_DB_DRIVER;
+		require_once GALENE_DB_DRIVER;
 		Gal_DB_Driver::inst()->sync_wp_roles($value);	
 	},10,3);
 });
