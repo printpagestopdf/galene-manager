@@ -2,7 +2,7 @@
 
 use phpseclib3\Crypt\Blowfish;
 
-require_once GALENDE_DB_DRIVER;
+require_once GALENE_DB_DRIVER;
 
 
 class Gal_Settings {

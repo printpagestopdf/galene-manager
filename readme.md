@@ -1,18 +1,5 @@
-=== Manager for Galène videoconference ===
-Contributors: theripper
-Tags: videoconference, lectures, conferences, meetings
-Requires at least: 4.7
-Tested up to: 6.1
-Requires PHP: 7.4
-Stable tag: 0.5.0
-License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Management system for a local or remote Galène videoconference server. Manages access for registered users, wordpress roles or by accesscode.
-
-== Description ==
-
-# Manager for Galène videoconference
+# Wordpress Plugin: Manager for Galène videoconference
 
 *"Galène* (or <em>Galene</em>) is a videoconference server (an “[SFU](https://webrtcglossary.com/sfu/)”) that is easy to deploy and that requires moderate server resources. It was originally designed for lectures, conferences and student tutorials, but is also useful for traditional meetings. ... Galène is free and open source software, subject to the [MIT licence](https://github.com/jech/galene/blob/master/LICENCE)." (Detailed information on [Product Page](https://galene.org/) and [Code Repository](https://github.com/jech/galene))
 
@@ -75,42 +62,20 @@ By the users dialog users can be added and updated:
 * password
 * if the user is allowed to administrate the Galène manager
 
-= Demo =
-None
-
-== Installation ==
+# Installation
 
 * Install and activate the plugin by one of usual wordpress methods
 * Create a page with the new page template 'Galène video conferencing manager'
 * Open this page in preview or normal mode and login with default credentials (<em>galene\_admin</em>, <em>galene</em>)
 * Change password of *galene\_admin* and setup system
 
-== Screenshots ==
+# Frequently Asked Questions
 
-1. Room dialog.
-2. Room users access settings.
-3. System settings.
-4. User settings.
 
-== Frequently Asked Questions ==
-
-= The Gutenberg Editor always displays 'Standard Template' if 'Galène video conferencing manager' is chosen as page template =
-Gutenberg Editor seems to handle page template names differently. Nevertheless, if 'Galène video conferencing manager' page template was choosen and the page successfully saved, this template ist used (independantly from the missleading display).
+Q: *The Gutenberg Editor always displays 'Standard Template' if 'Galène video conferencing manager' is chosen as page template* 
+A: Gutenberg Editor seems to handle page template names differently. Nevertheless, if 'Galène video conferencing manager' page template was choosen and the page successfully saved, this template ist used (independantly from the missleading display).
 Best way is, to use the Quick Edit in page listing to set and control the used template.
 
-= Is it possible to edit the page if page template 'Galène video conferencing manager' is used =
+Q: *Is it possible to edit the page if page template 'Galène video conferencing manager' is used*
 Yes, the title and the top of page is visible on the resulting page and can freely edited.
 
-== Changelog ==
-= 0.5 =
-
-* Initial release.
-
-== Upgrade Notice ==
-None
-
-== License ==
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-== Version history ==
-0.5 - Initial release.

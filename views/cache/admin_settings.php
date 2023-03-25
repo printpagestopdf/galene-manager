@@ -96,12 +96,28 @@
 		  </div>
 		  <p class="help"><?php echo __("Galène link without name of room (e.g. https://mygalene.org/group/)",'galene-mgr') ?></p>
 		</div>
-	
+
+		<div class="field">
+			<label class="label"><?php echo __("Token lifetime",'galene-mgr') ?></label>
+			<div class="control">
+			  <input required="required" name="general[galene_token_exp]" id="general[galene_token_exp]" class="input" min="0" oninput="validity.valid||(value='0');" type="number" value="<?php echo @$d['settings']['general']['galene_token_exp']?:30 ?>" >
+			</div>
+			<p class="help"><?php echo __("Lifetime of the JWT token for Galène Server authentication",'galene-mgr') ?></p>
+		  </div>
+
+		  <div class="field">
+			<label class="label"><?php echo __("Shift issued at",'galene-mgr') ?></label>
+			<div class="control">
+			  <input required="required" name="general[galene_issued_at]" id="general[galene_issued_at]" class="input" min="0" oninput="validity.valid||(value='0');" type="number" value="<?php echo @$d['settings']['general']['galene_issued_at']?:0 ?>" >
+			</div>
+			<p class="help"><?php echo __("Subtract seconds from now for JWT issued time (fix time difference between Galène server and manager host)",'galene-mgr') ?></p>
+		  </div>
+	  
 	</div>
 	
 	<div class="tab-content mx-5 box" id="server-tab">
 		<div class="accordion">	
-			<div class="card a-container mb-2">
+			<div class="card a-container mb-2 <?php echo (@$d['settings']['direct_server_access'] == 'filesystem')?' active ' : '' ?>">
 			  <div class="panel-heading is-flex p-0 <?php echo (@$d['settings']['direct_server_access'] == 'filesystem')?' has-background-success ' : '' ?>">
 				<div class="field is-flex is-align-items-center ml-2">			
 					<input type="checkbox" 
@@ -141,7 +157,7 @@
 			  <footer class="card-footer"></footer>
 			</div>
 		
-			<div class="card a-container mb-2 active">
+			<div class="card a-container mb-2 <?php echo (@$d['settings']['direct_server_access'] == 'sftp')?' active ' : '' ?>">
 			  <div class="panel-heading is-flex p-0 <?php echo (@$d['settings']['direct_server_access'] == 'sftp')?' has-background-success ' : '' ?>">
 				<div class="field is-flex is-align-items-center ml-2">			
 					<input type="checkbox" 
