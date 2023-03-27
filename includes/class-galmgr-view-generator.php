@@ -1,8 +1,8 @@
 <?php
-class Gal_View_Generator {
+class Galmgr_View_Generator {
 
 	public static $blocks = array();
-	public static $cache_path = GALENE_PLUGIN_PATH . 'views/cache/';
+	public static $cache_path = GALMGR_PLUGIN_PATH . 'views/cache/';
 	public static $cache_enabled = true;
 	public static $template_path ="";
 
@@ -67,11 +67,11 @@ class Gal_View_Generator {
 	}
 
 	public static function compile_echos($code) {
-		return preg_replace('~\{{\s*(.+?)\s*\}}~is', '<?php echo $1 ?>', $code);
+		return preg_replace('~\{{\s*(.+?)\s*\}}~is', '<?php echo esc_html($1) ?>', $code);
 	}
 
 	public static function compile_escaped_echos($code) {
-		return preg_replace('~\{{{\s*(.+?)\s*\}}}~is', '<?php echo htmlentities($1, ENT_QUOTES, \'UTF-8\') ?>', $code);
+		return preg_replace('~\{{{\s*(.+?)\s*\}}}~is', '<?php echo esc_attr($1) ?>', $code);
 	}
 
 	public static function compile_block($code) {

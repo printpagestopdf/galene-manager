@@ -1,6 +1,6 @@
 <?php
 
-class Gal_Filesystem_Driver {
+class Galmgr_Filesystem_Driver {
 	
 	private static $instance = null;
 	private $srv=null;

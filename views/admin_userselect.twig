@@ -14,18 +14,18 @@
 <input type="hidden" name="galene_room" id="galene_room" value="{{ $d['room']}}" >
 
 <p class="panel-heading mb-3">
-	{{ __("Edit accesslist of room",'galene-mgr') }}: {{ $d['room_display_name'] }}
+	{{ __("Edit accesslist of room",'manager-for-galene-videoconference') }}: {{ $d['room_display_name'] }}
 </p>
 
 
 <div class="content">
   <table class="table is-striped is-fullwidth is-narrow is-hoverable" >
 	<thead>
-		<th class="text-vertical text-bottom is-size-7" >{{ __("Operator",'galene-mgr') }}</th>
-		<th class="text-vertical text-bottom is-size-7" >{{ __("Presenter",'galene-mgr') }}</th>
-		<th class="text-vertical text-bottom is-size-7" >{{ __("Listener",'galene-mgr') }}</th>
-		<th class="text-bottom" >{{ __("Displayname",'galene-mgr') }}</th>
-		<th class="text-bottom" >{{ __("Loginname",'galene-mgr') }}</th>
+		<th class="text-vertical text-bottom is-size-7" >{{ __("Operator",'manager-for-galene-videoconference') }}</th>
+		<th class="text-vertical text-bottom is-size-7" >{{ __("Presenter",'manager-for-galene-videoconference') }}</th>
+		<th class="text-vertical text-bottom is-size-7" >{{ __("Listener",'manager-for-galene-videoconference') }}</th>
+		<th class="text-bottom" >{{ __("Displayname",'manager-for-galene-videoconference') }}</th>
+		<th class="text-bottom" >{{ __("Loginname",'manager-for-galene-videoconference') }}</th>
 	</thead>
 	<tbody>
   {% foreach($d['users'] as $user): if($user['type'] != 0) continue; %}
@@ -64,7 +64,7 @@
 		<td>{{ $user['login'] }}</td>
 	</tr> 
   {% endforeach; %}
-	<tr><td colspan="6"><h6 class="is-size-6 my-1 has-text-centered has-text-weight-bold">{{ __("Wordpress Roles",'galene-mgr') }}</h6></td></tr>
+	<tr><td colspan="6"><h6 class="is-size-6 my-1 has-text-centered has-text-weight-bold">{{ __("Wordpress Roles",'manager-for-galene-videoconference') }}</h6></td></tr>
   {% foreach($d['users'] as $user): if($user['type'] != 1) continue;%}
 	<tr>
 		<td>
@@ -97,7 +97,7 @@
 			  <label for="acc[{{ $user['id'] }}][is_other]"></label>
 			</div>
 		</td>
-		<td>{{ Gal_util::translate_wprole($user['displayName']) }}</td>
+		<td>{{ Galmgr_util::translate_wprole($user['displayName']) }}</td>
 		<td></td>
 	</tr>
   
@@ -109,12 +109,12 @@
 <div class="field is-grouped is-grouped-right mt-3">
   <p class="control">
 	<button class="button is-primary" type="submit" name="galene_action" id="galene_action" value="admin_update_userselect" >
-	  {{ __("Save",'galene-mgr') }}
+	  {{ __("Save",'manager-for-galene-videoconference') }}
 	</button>
   </p>
   <p class="control">
-	<a class="button is-light" href="{{ Gal_util::add_arg([ 'galene_action' => 'admin_screen_roomedit', 'galene_room' => $d['room'], 'active_tab' => 'privileges-tab', ]) }}#userlist">
-	  {{ __("Cancel",'galene-mgr') }}
+	<a class="button is-light" href="{{ Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_roomedit', 'galene_room' => $d['room'], 'active_tab' => 'privileges-tab', ]) }}#userlist">
+	  {{ __("Cancel",'manager-for-galene-videoconference') }}
 	</a>
   </p>
 </div>
@@ -122,5 +122,5 @@
 
 </form>
 <div class="preloader">
-  <img src="{% echo GALENE_PLUGIN_URL . '/assets/spinner.svg'; %}" alt="spinner">
+  <img src="{% echo esc_url(GALMGR_PLUGIN_URL . '/assets/spinner.svg') %}" alt="spinner">
 </div>

@@ -1,28 +1,28 @@
 {% extends main.twig %}
 
 {% block content %}
-<form class="box room-edit {{ $d['form_classes'] }}" method="POST">
+<form class="box room-edit {% echo sanitize_html_class($d['form_classes']) %}" method="POST">
 	{% wp_nonce_field("admin_update_room","gal_form_id",false,true) %}
-	<input type="hidden" name="galene_room" id="galene_room" value="{{ $d['room']->id }}" >
+	<input type="hidden" name="galene_room" id="galene_room" value="{{{ $d['room']->id }}}" >
 	<p class="panel-heading mb-3">
-		{{ __("Room",'galene-mgr') }}: "{{ @$d['room']->displayName?$d['room']->displayName:__("no name",'galene-mgr') }}"
+		{{ __("Room",'manager-for-galene-videoconference') }}: "{{ @$d['room']->displayName?$d['room']->displayName:__("no name",'manager-for-galene-videoconference') }}"
 	</p>
 
 	<div class="tabs is-boxed">
 	  <ul class="tabs-menu">
-		<li class="{{ (@$d['active_tab'] == 'settings-tab' || empty(@$d['active_tab']))? ' is-active ' : ''; }}" data-target="settings-tab">
+		<li class="{% echo sanitize_html_class((@$d['active_tab'] == 'settings-tab' || empty(@$d['active_tab']))?' is-active ':'') %}" data-target="settings-tab">
 		  <a>
-			<span>{{ __("General",'galene-mgr') }}</span>
+			<span>{{ __("General",'manager-for-galene-videoconference') }}</span>
 		  </a>
 		</li>
-		<li class="{{ (@$d['active_tab'] == 'privileges-tab')? ' is-active ' : ''; }}" data-target="privileges-tab">
+		<li class="{% echo sanitize_html_class((@$d['active_tab'] == 'privileges-tab')? ' is-active ' : '') %}" data-target="privileges-tab">
 		  <a>
-			<span>{{ __("Users",'galene-mgr') }}</span>
+			<span>{{ __("Users",'manager-for-galene-videoconference') }}</span>
 		  </a>
 		</li>
-		<li class="{{ (@$d['active_tab'] == 'server-tab')? ' is-active ' : ''; }}" data-target="server-tab">
+		<li class="{% echo sanitize_html_class((@$d['active_tab'] == 'server-tab')? ' is-active ' : '') %}" data-target="server-tab">
 		  <a>
-			<span>{{ __("Server",'galene-mgr') }}</span>
+			<span>{{ __("Server",'manager-for-galene-videoconference') }}</span>
 		  </a>
 		</li>
 	  </ul>
@@ -33,44 +33,44 @@
 		<div class="columns">
 			<div class="column">
 				<div class="field">
-				  <label class="label">{{ __("Display name",'galene-mgr') }}</label>
+				  <label class="label">{{ __("Display name",'manager-for-galene-videoconference') }}</label>
 				  <div class="control">
-					<input name="displayName" required="required" id="displayName" class="input" type="text" value="{{ @$d['room']->displayName }}" placeholder="{{ __("Display name",'galene-mgr') }}" >
+					<input name="displayName" required="required" id="displayName" class="input" type="text" value="{{{ @$d['room']->displayName }}}" placeholder="{{{ __("Display name",'manager-for-galene-videoconference') }}}" >
 				  </div>
-				  <p class="help">{{ __("Human readable name of room",'galene-mgr') }}</p>
+				  <p class="help">{{ __("Human readable name of room",'manager-for-galene-videoconference') }}</p>
 				</div>
 				
 				<div class="field">
-				  <label class="label">{{ __("Description",'galene-mgr') }}</label>
+				  <label class="label">{{ __("Description",'manager-for-galene-videoconference') }}</label>
 				  <div class="control">
-					<textarea name="description" id="description" class="textarea is-small" placeholder="{{ __("Description",'galene-mgr') }}">{{ @$d['room']->description }}</textarea>
+					<textarea name="description" id="description" class="textarea is-small" placeholder="{{{ __("Description",'manager-for-galene-videoconference') }}}">{% echo esc_textarea(@$d['room']->description) %}</textarea>
 				  </div>
-				  <p class="help">{{ __("Description that is visible on rooms listing",'galene-mgr') }}</p>
+				  <p class="help">{{ __("Description that is visible on rooms listing",'manager-for-galene-videoconference') }}</p>
 				</div>
 
 				<div class="field ">			
-					<input type="checkbox" class="is-checkradio" name="show_on_roomslist" id="show_on_roomslist" {{ @$d['room']->show_on_roomslist?'checked' : '' }}  >
-					<label for="show_on_roomslist">{{ __("Show this room on rooms listing",'galene-mgr') }}</label>
-					<p class="help">{{ __("If checked, this room will be visible on the public rooms listing",'galene-mgr') }}</p>
+					<input type="checkbox" class="is-checkradio" name="show_on_roomslist" id="show_on_roomslist" {{{ @$d['room']->show_on_roomslist?'checked' : '' }}}  >
+					<label for="show_on_roomslist">{{ __("Show this room on rooms listing",'manager-for-galene-videoconference') }}</label>
+					<p class="help">{{ __("If checked, this room will be visible on the public rooms listing",'manager-for-galene-videoconference') }}</p>
 				</div>	
 			</div>
 			
 			<div class="column has-background-white-ter">
 				<input type="hidden" name="access" value="code">
-				<label class="label">{{ __("Room access conditions / Security",'galene-mgr') }}</label>
+				<label class="label">{{ __("Room access conditions / Security",'manager-for-galene-videoconference') }}</label>
 				
 				<div class="fld-access-code mb-3">
-					<input type="checkbox" class="is-checkradio has-background-color hide-unchecked" name="needs_code" id="needs_code" {{ @$d['room']->needs_code?'checked' : '' }}  >
-					<label for="needs_code">{{ __("Use <b>Code</b>",'galene-mgr') }}</label>
+					<input type="checkbox" class="is-checkradio has-background-color hide-unchecked" name="needs_code" id="needs_code" {{{ @$d['room']->needs_code?'checked' : '' }}}  >
+					<label for="needs_code">{% echo wp_kses(__("Use <b>Code</b>",'manager-for-galene-videoconference'),'data') %}</label>
 					<div class="mt-2">
 						<div class="field has-addons" >
 						  <div class="control">
-							<input name="room_accesscode" id="room_accesscode" class="input" type="text" value="{{ @$d['room']->room_accesscode }}" >
+							<input name="room_accesscode" id="room_accesscode" class="input" type="text" value="{{{ @$d['room']->room_accesscode }}}" >
 						  </div>
 						  <div class="control">
 							<a id="generate-code" class="button is-warning" title="Generate code">
 								<figure class="image is-24x24">
-								  <img src="{{ GALENE_PLUGIN_URL }}/assets/magic-wand-outline.svg">
+								  <img src="{% echo esc_url(GALMGR_PLUGIN_URL . '/assets/magic-wand-outline.svg') %}">
 								</figure>
 							</a>
 						  </div>
@@ -79,59 +79,59 @@
 				</div>
 				
 				<div class="field ">			
-					<input type="checkbox" class="is-checkradio has-background-color" name="needs_nickname" id="needs_nickname" {{ @$d['room']->needs_nickname?'checked' : '' }}  >
-					<label for="needs_nickname">{{ __("Needs <b>nickname</b>",'galene-mgr') }}</label>
-					 <p class="help">{{ __("Otherwise random name will be generated",'galene-mgr') }}</p>
+					<input type="checkbox" class="is-checkradio has-background-color" name="needs_nickname" id="needs_nickname" {{{ @$d['room']->needs_nickname?'checked' : '' }}}  >
+					<label for="needs_nickname">{% echo wp_kses(__("Needs <b>nickname</b>",'manager-for-galene-videoconference'),'data') %}</label>
+					 <p class="help">{{ __("Otherwise random name will be generated",'manager-for-galene-videoconference') }}</p>
 				</div>	
 				
-				<label class="label">{{ __("Authentication necessary for:",'galene-mgr') }}</label>
+				<label class="label">{{ __("Authentication necessary for:",'manager-for-galene-videoconference') }}</label>
 				<div class="field ">			
-					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_other" id="auth_for_other" {{ @$d['room']->auth_for_other?'checked' : '' }}  >
-					<label for="auth_for_other">{{ __("Attendance as listener",'galene-mgr') }}</label>
+					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_other" id="auth_for_other" {{{ @$d['room']->auth_for_other?'checked' : '' }}}  >
+					<label for="auth_for_other">{{ __("Attendance as listener",'manager-for-galene-videoconference') }}</label>
 				</div>	
 				<div class="field ">			
-					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_presentator" id="auth_for_presentator" {{ @$d['room']->auth_for_presentator?'checked' : '' }}  >
-					<label for="auth_for_presentator">{{ __("Attendance as presenter",'galene-mgr') }}</label>
+					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_presentator" id="auth_for_presentator" {{{ @$d['room']->auth_for_presentator?'checked' : '' }}}  >
+					<label for="auth_for_presentator">{{ __("Attendance as presenter",'manager-for-galene-videoconference') }}</label>
 				</div>	
 				<div class="field ">			
-					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_operator" id="auth_for_operator" {{ @$d['room']->auth_for_operator?'checked' : '' }}  >
-					<label for="auth_for_operator">{{ __("Attendance as operator",'galene-mgr') }}</label>
+					<input type="checkbox" class="is-checkradio has-background-color" name="auth_for_operator" id="auth_for_operator" {{{ @$d['room']->auth_for_operator?'checked' : '' }}}  >
+					<label for="auth_for_operator">{{ __("Attendance as operator",'manager-for-galene-videoconference') }}</label>
 				</div>	
 			</div>
 		</div>
 		
 		<div class="field">
-		  <label class="label">{{ __("Link for listener",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Link for listener",'manager-for-galene-videoconference') }}</label>
 		  <div class="field is-grouped">
 			  <div class="control">
-				<a href="{{ @$d['room_urls']['recipient'] }}" target="_blank">{{ @$d['room_urls']['recipient'] }}</a>
+				<a href="{% echo esc_url(@$d['room_urls']['recipient']) %}" target="_blank">{{ @$d['room_urls']['recipient'] }}</a>
 			  </div>
 			  <div class="control">
-				<button onclick="copyText('{{ @$d['room_urls']['recipient'] }}'); return false;">{{ __("Copy link",'galene-mgr') }}</button>
+				<button onclick="copyText('{% echo esc_url(@$d['room_urls']['recipient']) %}'); return false;">{{ __("Copy link",'manager-for-galene-videoconference') }}</button>
 			  </div>
 		  </div>
 		</div> 
 		
 		<div class="field">
-		  <label class="label">{{ __("Link for presenter",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Link for presenter",'manager-for-galene-videoconference') }}</label>
 		  <div class="field is-grouped">
 			  <div class="control">
-				<a href="{{ @$d['room_urls']['presenter'] }}" target="_blank">{{ @$d['room_urls']['presenter'] }}</a>
+				<a href="{% echo esc_url(@$d['room_urls']['presenter']) %}" target="_blank">{{ @$d['room_urls']['presenter'] }}</a>
 			  </div>
 			  <div class="control">
-				<button onclick="copyText('{{ @$d['room_urls']['presenter'] }}'); return false;">{{ __("Copy link",'galene-mgr') }}</button>
+				<button onclick="copyText('{% echo esc_url(@$d['room_urls']['presenter']) %}'); return false;">{{ __("Copy link",'manager-for-galene-videoconference') }}</button>
 			  </div>
 		  </div>
 		</div> 
 		
 		<div class="field">
-		  <label class="label">{{ __("Link for operator",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Link for operator",'manager-for-galene-videoconference') }}</label>
 		  <div class="field is-grouped">
 			  <div class="control">
-				<a href="{{ @$d['room_urls']['admin'] }}" target="_blank">{{ @$d['room_urls']['admin'] }}</a>
+				<a href="{% echo esc_url(@$d['room_urls']['admin']) %}" target="_blank">{{ @$d['room_urls']['admin'] }}</a>
 			  </div>
 			  <div class="control">
-				<button onclick="copyText('{{ @$d['room_urls']['admin'] }}'); return false;">{{ __("Copy link",'galene-mgr') }}</button>
+				<button onclick="copyText('{% echo esc_url(@$d['room_urls']['admin']) %}'); return false;">{{ __("Copy link",'manager-for-galene-videoconference') }}</button>
 			  </div>
 		  </div>
 		</div> 
@@ -143,35 +143,35 @@
 		{% if(@$d['room']->id && $d['room']->id >= 0) : %}
 			<p class="is-pulled-right">
 				<a class="button is-info" type="button" aria-haspopup="true" 
-					href="{% echo Gal_util::add_arg(['galene_action' => 'admin_screen_userselect', 'galene_room' => $d['room']->id , 'room_display_name' => $d['room']->displayName ]); %}">
-						{{ __("Edit accesslist",'galene-mgr') }}
+					href="{% echo esc_url(Galmgr_util::add_arg(['galene_action' => 'admin_screen_userselect', 'galene_room' => $d['room']->id , 'room_display_name' => $d['room']->displayName ])); %}">
+						{{ __("Edit accesslist",'manager-for-galene-videoconference') }}
 				</a>
 			</p>			
 			  <table id="userlist" class="table is-striped is-fullwidth is-narrow is-hoverable" >
 				<thead>
-					<th class="text-vertical text-bottom is-size-7" >{{ __("Operator",'galene-mgr') }}</th>
-					<th class="text-vertical text-bottom is-size-7" >{{ __("Presenter",'galene-mgr') }}</th>
-					<th class="text-vertical text-bottom is-size-7" >{{ __("Listener",'galene-mgr') }}</th>
-					<th class="text-bottom" >{{ __("Display name",'galene-mgr') }}</th>
-					<th class="text-bottom" >{{ __("Login name",'galene-mgr') }}</th>
+					<th class="text-vertical text-bottom is-size-7" >{{ __("Operator",'manager-for-galene-videoconference') }}</th>
+					<th class="text-vertical text-bottom is-size-7" >{{ __("Presenter",'manager-for-galene-videoconference') }}</th>
+					<th class="text-vertical text-bottom is-size-7" >{{ __("Listener",'manager-for-galene-videoconference') }}</th>
+					<th class="text-bottom" >{{ __("Display name",'manager-for-galene-videoconference') }}</th>
+					<th class="text-bottom" >{{ __("Login name",'manager-for-galene-videoconference') }}</th>
 				</thead>
 				<tbody>
 			  {% foreach(@$d['users'] as $user): if($user['type'] != 0) continue; %}
 				<tr>
-					<td class="{{ $user['is_operator']? 'is-checkmark' : '' }}"><div></div></td>
-					<td class="{{ $user['is_presenter']? 'is-checkmark' : '' }}"><div></div></td>
-					<td class="{{ $user['is_other']? 'is-checkmark' : '' }}"><div></div></td>
+					<td class="{% echo sanitize_html_class($user['is_operator']? 'is-checkmark' : '') %}"><div></div></td>
+					<td class="{% echo sanitize_html_class($user['is_presenter']? 'is-checkmark' : '') %}"><div></div></td>
+					<td class="{% echo sanitize_html_class($user['is_other']? 'is-checkmark' : '') %}"><div></div></td>
 					<td>{{ $user['displayName'] }}</td>
 					<td>{{ $user['login'] }}</td>
 				</tr>			  
 			  {% endforeach; %}
-			  <tr><td colspan="6"><h6 class="is-size-6 my-1 has-text-centered has-text-weight-bold">{{ __("Wordpress Roles",'galene-mgr') }}</h6></td></tr>
+			  <tr><td colspan="6"><h6 class="is-size-6 my-1 has-text-centered has-text-weight-bold">{{ __("Wordpress Roles",'manager-for-galene-videoconference') }}</h6></td></tr>
 			  {% foreach(@$d['users'] as $user): if($user['type'] != 1) continue; %}
 				<tr>
-					<td class="{{ $user['is_operator']? 'is-checkmark' : '' }}"><div></div></td>
-					<td class="{{ $user['is_presenter']? 'is-checkmark' : '' }}"><div></div></td>
-					<td class="{{ $user['is_other']? 'is-checkmark' : '' }}"><div></div></td>
-					<td>{{ Gal_util::translate_wprole($user['displayName']) }}</td>
+					<td class="{% echo sanitize_html_class($user['is_operator']? 'is-checkmark' : '') %}"><div></div></td>
+					<td class="{% echo sanitize_html_class($user['is_presenter']? 'is-checkmark' : '') %}"><div></div></td>
+					<td class="{% echo sanitize_html_class($user['is_other']? 'is-checkmark' : '') %}"><div></div></td>
+					<td>{{ Galmgr_util::translate_wprole($user['displayName']) }}</td>
 					<td></td>
 				</tr>			  
 			  {% endforeach; %}
@@ -179,7 +179,7 @@
 				</tbody>
 			  </table>
 		{% else: %}
-			<h4 class="subtitle is-4">{{ __("Userslist can only be edited after saving roomsettings",'galene-mgr') }}</h4>
+			<h4 class="subtitle is-4">{{ __("Userslist can only be edited after saving roomsettings",'manager-for-galene-videoconference') }}</h4>
 		{% endif; %}
  		</div>	
 	</div>
@@ -191,20 +191,20 @@
 			
 				<aside class="menu">
 				  <p class="menu-label">
-					{{ __("Import/Export",'galene-mgr') }}
+					{{ __("Import/Export",'manager-for-galene-videoconference') }}
 				  </p>
 				  <ul class="menu-list">
 					<li>
-						<a target="dl_dummy_frame" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_download_room_json', 'galene_room' => $d['room']->id ]) %}" >
-						  <span class="is-underlined">{{ __("Export serverfile",'galene-mgr') }}</span>
-						  <p class="help">({{ __("Group config (.json) file for Galène server",'galene-mgr') }})</p>
+						<a target="dl_dummy_frame" href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_download_room_json', 'galene_room' => $d['room']->id ])) %}" >
+						  <span class="is-underlined">{{ __("Export serverfile",'manager-for-galene-videoconference') }}</span>
+						  <p class="help">({{ __("Group config (.json) file for Galène server",'manager-for-galene-videoconference') }})</p>
 						</a>
 					</li>
 					<li class="import-srv-json is-primary">
 						<a class="is-primary">
-							<label for="import-srv-json" class="is-underlined">{{ __("Import serverfile",'galene-mgr') }}</label>
+							<label for="import-srv-json" class="is-underlined">{{ __("Import serverfile",'manager-for-galene-videoconference') }}</label>
 							<input type="file" id="import-srv-json" accept="*.json">
-							<p class="help">({{ __("Group config (.json) file from Galène server",'galene-mgr') }})</p>
+							<p class="help">({{ __("Group config (.json) file from Galène server",'manager-for-galene-videoconference') }})</p>
 						</a>
 					</li>
 				  </ul>
@@ -212,62 +212,62 @@
 			</div>				
 			<div class="column" >
 				<div class="field">
-				  <label class="label">{{ __("Galène group name",'galene-mgr') }}</label>
+				  <label class="label">{{ __("Galène group name",'manager-for-galene-videoconference') }}</label>
 				  <div class="control">
-					<input required="required" name="galene_group" id="galene_group" class="input" type="text" value="{{ @$d['room']->galene_group }}" >
+					<input required="required" name="galene_group" id="galene_group" class="input" type="text" value="{{{ @$d['room']->galene_group }}}" >
 				  </div>
-				  <p class="help">{{ __("Name of Galène group (filename of .json config) on Galène Server",'galene-mgr') }}</p>
+				  <p class="help">{{ __("Name of Galène group (filename of .json config) on Galène Server",'manager-for-galene-videoconference') }}</p>
 				</div> 
 
 
 				<div class="field">
-				  <label class="label">{{ __("Galène key",'galene-mgr') }}</label>
+				  <label class="label">{{ __("Galène key",'manager-for-galene-videoconference') }}</label>
 				  <div class="control">
-					<input required="required" name="key64" id="key64" class="input" type="text" value="{{ $d['room']->key64 }}" >
+					<input required="required" name="key64" id="key64" class="input" type="text" value="{{{ $d['room']->key64 }}}" >
 				  </div>
-				  <p class="help">{{ __("JWT key of Galène group (base64url format)",'galene-mgr') }}</p>
+				  <p class="help">{{ __("JWT key of Galène group (base64url format)",'manager-for-galene-videoconference') }}</p>
 				</div>
 			</div>				
 		</div>				
 		
 		<div class="card field">
 			<header class="card-header">
-				<p class="card-header-title">{{ __("Options",'galene-mgr') }}</p>
+				<p class="card-header-title">{{ __("Options",'manager-for-galene-videoconference') }}</p>
 			</header>
 
 			<div class="card-content columns is-multiline">
 				<div class="field  column  is-one-quarter ">
 					<label class="checkbox">
-					  <input type="checkbox" name="allow_anonymous" id="allow_anonymous" {{ @$d['room']->allow_anonymous?'checked': '' }} >
-					  {{ __("Allow anonymous attendance",'galene-mgr') }}
+					  <input type="checkbox" name="allow_anonymous" id="allow_anonymous" {{{ @$d['room']->allow_anonymous?'checked': '' }}} >
+					  {{ __("Allow anonymous attendance",'manager-for-galene-videoconference') }}
 					</label>
-					<p class="help">{{ __("Attendance without nickname is possible",'galene-mgr') }}</p>
+					<p class="help">{{ __("Attendance without nickname is possible",'manager-for-galene-videoconference') }}</p>
 				</div>			
 				<div class="field  column  is-one-quarter  ">
 					<label class="checkbox">
-					  <input type="checkbox" name="allow_subgroups" id="allow_subgroups" {{ @$d['room']->allow_subgroups?'checked': '' }} >
-					  {{ __("Allow subgroups",'galene-mgr') }}
+					  <input type="checkbox" name="allow_subgroups" id="allow_subgroups" {{{ @$d['room']->allow_subgroups?'checked': '' }}} >
+					  {{ __("Allow subgroups",'manager-for-galene-videoconference') }}
 					</label>
-					<p class="help">{{ __("Subgroup rooms (aka breakout rooms) can be createt",'galene-mgr') }}</p>
+					<p class="help">{{ __("Subgroup rooms (aka breakout rooms) can be createt",'manager-for-galene-videoconference') }}</p>
 				</div>			
 				<div class="field  column  is-one-quarter ">
 					<label class="checkbox">
-					  <input type="checkbox" name="autolock" id="autolock" {{ @$d['room']->autolock?'checked': '' }} >
-					  {{ __("Auto room locking",'galene-mgr') }}
+					  <input type="checkbox" name="autolock" id="autolock" {{{ @$d['room']->autolock?'checked': '' }}} >
+					  {{ __("Auto room locking",'manager-for-galene-videoconference') }}
 					</label>
-					<p class="help">{{ __("Room will be locked automatically without operator",'galene-mgr') }}</p>
+					<p class="help">{{ __("Room will be locked automatically without operator",'manager-for-galene-videoconference') }}</p>
 				</div>			
 				<div class="field  column  is-one-quarter ">
 					<label class="checkbox">
-					  <input type="checkbox" name="allow_recording" id="allow_recording" {{ @$d['room']->allow_recording?'checked': '' }} >
-					  {{ __("Allow recording",'galene-mgr') }}
+					  <input type="checkbox" name="allow_recording" id="allow_recording" {{{ @$d['room']->allow_recording?'checked': '' }}} >
+					  {{ __("Allow recording",'manager-for-galene-videoconference') }}
 					</label>
-					<p class="help">{{ __("Allow session recording",'galene-mgr') }}</p>
+					<p class="help">{{ __("Allow session recording",'manager-for-galene-videoconference') }}</p>
 				</div>			
 				<div class="field  column  is-one-quarter ">
-					<label class="checkbox">{{ __("Max. attendees",'galene-mgr') }}</label>
-					  <input type="number"  name="max_clients" id="max_clients" value="{{ @$d['room']->max_clients?$d['room']->max_clients:0 }}">
-					<p class="help">{{ __("Limit number of attendees (unlimited set to 0)",'galene-mgr') }}</p>
+					<label class="checkbox">{{ __("Max. attendees",'manager-for-galene-videoconference') }}</label>
+					  <input type="number"  name="max_clients" id="max_clients" value="{{{ @$d['room']->max_clients?$d['room']->max_clients:0 }}}">
+					<p class="help">{{ __("Limit number of attendees (unlimited set to 0)",'manager-for-galene-videoconference') }}</p>
 				</div>			
 			</div>	
 			<footer class="card-footer">	</footer>	
@@ -280,12 +280,12 @@
 	<div class="field is-grouped is-grouped-right mt-3">
 	  <p class="control">
 		<button class="button is-primary" type="submit" name="galene_action" id="galene_action" value="admin_update_room" >
-		  {{ __("Save",'galene-mgr') }}
+		  {{ __("Save",'manager-for-galene-videoconference') }}
 		</button>
 	  </p>
 	  <p class="control">
-		<a class="button is-light" href="{{ Gal_util::add_arg([ 'galene_action' => 'admin_screen_roomsettings' ]) }}">
-		  {{ __("Cancel",'galene-mgr') }}
+		<a class="button is-light" href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_roomsettings' ])) %}">
+		  {{ __("Cancel",'manager-for-galene-videoconference') }}
 		</a>
 	  </p>
 	</div>
@@ -295,10 +295,10 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">{{ __("Select users",'galene-mgr') }}</p>
+      <p class="modal-card-title">{{ __("Select users",'manager-for-galene-videoconference') }}</p>
       <button class="delete" aria-label="close"></button>
     </header>
-    <section class="modal-card-body" data-iframe="{{ @$d['iframe_src'] }}" >	
+    <section class="modal-card-body" data-iframe="{% echo esc_url(@$d['iframe_src']) %}" >	
 	</section>
   </div>
 </div>

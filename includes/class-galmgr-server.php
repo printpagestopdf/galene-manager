@@ -1,6 +1,6 @@
 <?php
 	
-class Gal_Server {
+class Galmgr_Server {
 	
 	private static $instance = null;
 	private $settings=null;
@@ -18,21 +18,21 @@ class Gal_Server {
 	}
 	
 	private function __construct() {
-		require_once GALENE_PLUGIN_PATH . 'includes/class-gal-settings.php';
-		$this->settings=Gal_Settings::inst();
+		require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-settings.php';
+		$this->settings=Galmgr_Settings::inst();
 		
 		switch($this->settings->get_server_access())
 		{
 			case "sftp":
-				require_once GALENE_PLUGIN_PATH . 'includes/class-gal-sftp-driver.php';
-				$this->drv=Gal_Sftp_Driver::inst($this->settings);
+				require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-sftp-driver.php';
+				$this->drv=Galmgr_Sftp_Driver::inst($this->settings);
 				$this->can_write=$this->drv->can_write;
 				$this->can_read=$this->drv->can_read;
 				break;
 				
 			case "filesystem":
-				require_once GALENE_PLUGIN_PATH . 'includes/class-gal-filesystem-driver.php';
-				$this->drv=Gal_Filesystem_Driver::inst($this->settings);
+				require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-filesystem-driver.php';
+				$this->drv=Galmgr_Filesystem_Driver::inst($this->settings);
 				$this->can_write=$this->drv->can_write;
 				$this->can_read=$this->drv->can_read;
 				break;

@@ -3,7 +3,7 @@
 use phpseclib3\Net\SFTP;
 use phpseclib3\Crypt\PublicKeyLoader;
 
-class Gal_Sftp_Driver {
+class Galmgr_Sftp_Driver {
 	
 	private static $instance = null;
 	private $srv=null;

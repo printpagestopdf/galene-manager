@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Galène for WP\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-03 10:47+0000\n"
-"PO-Revision-Date: 2023-03-16 12:06+0000\n"
+"PO-Revision-Date: 2023-03-27 17:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -58,7 +58,7 @@ msgstr "Teilnahme als Präsentator*in"
 msgid "Attendance without nickname is possible"
 msgstr "Teilnahme ohne Anzeigename möglich"
 
-#: views/cache/admin_settings.php:192 views/admin_settings.twig:124
+#: views/cache/admin_settings.php:208 views/admin_settings.twig:140
 msgid "Authentication"
 msgstr "Authentifizierung"
 
@@ -70,9 +70,9 @@ msgstr "Authentisierung notwendig für:"
 msgid "Auto room locking"
 msgstr "Autom. Raumsperre"
 
-#: views/cache/admin_roomedit.php:356 views/cache/admin_settings.php:310
+#: views/cache/admin_roomedit.php:356 views/cache/admin_settings.php:326
 #: views/cache/admin_useredit.php:133 views/cache/admin_userselect.php:118
-#: views/admin_roomedit.twig:288 views/admin_settings.twig:242
+#: views/admin_roomedit.twig:288 views/admin_settings.twig:258
 #: views/admin_useredit.twig:65 views/admin_userselect.twig:117
 msgid "Cancel"
 msgstr "Abbruch"
@@ -136,7 +136,7 @@ msgstr "Beschreibung"
 msgid "Description that is visible on rooms listing"
 msgstr "Beschreibungstext, der in der Raumliste angezeigt wird"
 
-#: views/cache/admin_settings.php:116 views/admin_settings.twig:48
+#: views/cache/admin_settings.php:132 views/admin_settings.twig:64
 msgid "Direct filesystem access"
 msgstr "Direkter Dateisystem Zugriff"
 
@@ -168,7 +168,7 @@ msgstr "Soll dieser Raum wirkliche endgültig gelöscht werden?"
 msgid "Do you really want to delete this user? All data are lost."
 msgstr "Soll diese Benutzer*in wirklich endgültig gelöscht werden?"
 
-#: views/cache/admin_settings.php:178 views/admin_settings.twig:110
+#: views/cache/admin_settings.php:194 views/admin_settings.twig:126
 msgid "Domainname (hostname) or IP to connect Server by SFTP"
 msgstr "Domainname oder IP Adresse für SFTP mit dem Galène Server"
 
@@ -222,7 +222,7 @@ msgstr "Fehler beim Speichern"
 msgid "Export serverfile"
 msgstr "Serverdatei exportieren"
 
-#: views/cache/admin_settings.php:127 views/admin_settings.twig:59
+#: views/cache/admin_settings.php:143 views/admin_settings.twig:75
 msgid "Full path to Galène group directory"
 msgstr "Voller Dateisystempfad zum Galène group Verzeichnis"
 
@@ -260,12 +260,12 @@ msgstr "Gruppen Konfigurationsdatei (.json) für Galène Server"
 msgid "Group config (.json) file from Galène server"
 msgstr "Gruppen Konfigurationsdatei (.json) von Galène Server"
 
-#: views/cache/admin_settings.php:174 views/admin_settings.twig:106
+#: views/cache/admin_settings.php:190 views/admin_settings.twig:122
 msgid "Hostname/IP"
 msgstr "Hostname/IP"
 
 #. URI of the plugin
-msgid "https://github.com/printpagestopdf/GaleneManager"
+msgid "https://github.com/printpagestopdf/galene-manager"
 msgstr ""
 
 #. Author URI of the plugin
@@ -301,6 +301,10 @@ msgstr "Ist Administrator*in"
 #: views/cache/admin_roomedit.php:296 views/admin_roomedit.twig:228
 msgid "JWT key of Galène group (base64url format)"
 msgstr "JWT key der Galène Gruppe (base64url format)"
+
+#: views/cache/admin_settings.php:105 views/admin_settings.twig:37
+msgid "Lifetime of the JWT token for Galène Server authentication"
+msgstr "Gültigkeit des JWT Tokens zur Anmeldung am Galène Server"
 
 #: views/cache/admin_roomedit.php:338 views/admin_roomedit.twig:270
 msgid "Limit number of attendees (unlimited set to 0)"
@@ -353,7 +357,7 @@ msgstr "Passwort nur eintragen bei neuen Benutzer*innen oder Passwortänderung"
 msgid "Loginname"
 msgstr "Loginname"
 
-#: views/cache/admin_settings.php:198 views/admin_settings.twig:130
+#: views/cache/admin_settings.php:214 views/admin_settings.twig:146
 msgid "Loginname at Galène Server for SSH/SFTP access"
 msgstr "Anmeldename am Galène Server für SSH/SFTP Zugang"
 
@@ -365,18 +369,22 @@ msgid "Logout"
 msgstr "Abmelden"
 
 #. Description of the plugin
-msgid "Management system for the Galène video conferencing server"
+#, fuzzy
+#| msgid "Management system for the Galène video conferencing server"
+msgid "Management system for the Galène videoconferencing server"
 msgstr "Verwaltungssystem für Galène Video Konferenzserver"
 
 #. Name of the plugin
-msgid "Manager for Galène video conferencing"
+#, fuzzy
+#| msgid "Manager for Galène video conferencing"
+msgid "Manager for Galène videoconference"
 msgstr "Verwaltung für Galène Video Konferenz"
 
 #: views/cache/admin_roomedit.php:336 views/admin_roomedit.twig:268
 msgid "Max. attendees"
 msgstr "Max. Teilnehmerzahl"
 
-#: views/cache/admin_settings.php:201 views/admin_settings.twig:133
+#: views/cache/admin_settings.php:217 views/admin_settings.twig:149
 msgid "Method of authentication"
 msgstr "Authentisierungsmethode"
 
@@ -431,26 +439,26 @@ msgid "Otherwise random name will be generated"
 msgstr "Andernfalls wird ein zufälliger Name erzeugt"
 
 #: views/cache/admin_auth.php:87 views/cache/admin_auth.php:89
-#: views/cache/admin_settings.php:213 views/cache/admin_settings.php:266
+#: views/cache/admin_settings.php:229 views/cache/admin_settings.php:282
 #: views/cache/admin_useredit.php:98 views/cache/user_auth.php:103
-#: views/admin_auth.twig:19 views/admin_settings.twig:145
-#: views/admin_settings.twig:198 views/admin_useredit.twig:30
+#: views/admin_auth.twig:19 views/admin_settings.twig:161
+#: views/admin_settings.twig:214 views/admin_useredit.twig:30
 #: views/user_auth.twig:35
 msgid "Password"
 msgstr "Passwort"
 
-#: views/cache/admin_settings.php:221 views/cache/admin_settings.php:274
+#: views/cache/admin_settings.php:237 views/cache/admin_settings.php:290
 #: views/cache/admin_useredit.php:106 views/cache/admin_useredit.php:110
-#: views/admin_settings.twig:153 views/admin_settings.twig:206
+#: views/admin_settings.twig:169 views/admin_settings.twig:222
 #: views/admin_useredit.twig:38 views/admin_useredit.twig:42
 msgid "Password (repeat)"
 msgstr "Passwortwiederholung"
 
-#: views/cache/admin_settings.php:217 views/admin_settings.twig:149
+#: views/cache/admin_settings.php:233 views/admin_settings.twig:165
 msgid "Password at Galène Server for SSH/SFTP access"
 msgstr "Passwort für SSH/SFTP Zugriff auf Galène Server"
 
-#: views/cache/admin_settings.php:270 views/admin_settings.twig:202
+#: views/cache/admin_settings.php:286 views/admin_settings.twig:218
 msgid "Password for the private key file"
 msgstr "Passwort für die \"private key\" Datei"
 
@@ -458,7 +466,7 @@ msgstr "Passwort für die \"private key\" Datei"
 msgid "Password repeat does not match Password"
 msgstr "Passwortwiederholung entspricht nicht dem Passwort"
 
-#: views/cache/admin_settings.php:169 views/admin_settings.twig:101
+#: views/cache/admin_settings.php:185 views/admin_settings.twig:117
 msgid "Path to Galène group directory at server"
 msgstr "Dateiverzeichnispfad zum Galène group Verzeichnis auf dem Server"
 
@@ -470,12 +478,12 @@ msgstr "Raum endgültig löschen"
 msgid "Permanently delete this user"
 msgstr "Benutzer*in endgültig löschen"
 
-#: views/cache/admin_settings.php:137 views/cache/admin_settings.php:291
-#: views/admin_settings.twig:69 views/admin_settings.twig:223
+#: views/cache/admin_settings.php:153 views/cache/admin_settings.php:307
+#: views/admin_settings.twig:85 views/admin_settings.twig:239
 msgid "Please save settings/changes before testing"
 msgstr "Bitte speichern vor dem Testen"
 
-#: views/cache/admin_settings.php:182 views/admin_settings.twig:114
+#: views/cache/admin_settings.php:198 views/admin_settings.twig:130
 msgid "Port"
 msgstr "Port"
 
@@ -486,7 +494,7 @@ msgstr "Port"
 msgid "Presenter"
 msgstr "Präsentator*in"
 
-#: views/cache/admin_settings.php:261 views/admin_settings.twig:193
+#: views/cache/admin_settings.php:277 views/admin_settings.twig:209
 msgid "Private key is encrypted with password"
 msgstr "Der \"private key\" ist mit Passwort verschlüsselt"
 
@@ -498,12 +506,12 @@ msgstr "Basislink des Galène Servers"
 msgid "Public rooms"
 msgstr "Öffentliche Räume"
 
-#: views/cache/admin_settings.php:236 views/admin_settings.twig:168
+#: views/cache/admin_settings.php:252 views/admin_settings.twig:184
 msgid "Public/Private key authentication"
 msgstr "Public/Private Key Authentisierung"
 
-#: views/cache/admin_settings.php:225 views/cache/admin_settings.php:278
-#: views/admin_settings.twig:157 views/admin_settings.twig:210
+#: views/cache/admin_settings.php:241 views/cache/admin_settings.php:294
+#: views/admin_settings.twig:173 views/admin_settings.twig:226
 msgid "Repeat your password"
 msgstr "Passwort wiederholen"
 
@@ -544,14 +552,14 @@ msgstr "Raum ohne Operator*in automatisch sperren"
 msgid "Rooms"
 msgstr "Räume"
 
-#: views/cache/admin_roomedit.php:351 views/cache/admin_settings.php:305
+#: views/cache/admin_roomedit.php:351 views/cache/admin_settings.php:321
 #: views/cache/admin_useredit.php:128 views/cache/admin_userselect.php:113
-#: views/admin_roomedit.twig:283 views/admin_settings.twig:237
+#: views/admin_roomedit.twig:283 views/admin_settings.twig:253
 #: views/admin_useredit.twig:60 views/admin_userselect.twig:112
 msgid "Save"
 msgstr "Speichern"
 
-#: views/cache/admin_settings.php:250 views/admin_settings.twig:182
+#: views/cache/admin_settings.php:266 views/admin_settings.twig:198
 msgid "Select private key file"
 msgstr "Private Schlüsseldatei auswählen"
 
@@ -567,7 +575,7 @@ msgstr "Seminar"
 msgid "Server"
 msgstr "Server"
 
-#: views/cache/admin_settings.php:156 views/admin_settings.twig:88
+#: views/cache/admin_settings.php:172 views/admin_settings.twig:104
 msgid "Server acces by SFTP"
 msgstr "Serverzugriff über SFTP"
 
@@ -575,10 +583,14 @@ msgstr "Serverzugriff über SFTP"
 msgid "Server connection"
 msgstr "Serververanbindung"
 
-#: views/cache/admin_settings.php:123 views/cache/admin_settings.php:165
-#: views/admin_settings.twig:55 views/admin_settings.twig:97
+#: views/cache/admin_settings.php:139 views/cache/admin_settings.php:181
+#: views/admin_settings.twig:71 views/admin_settings.twig:113
 msgid "Server path"
 msgstr "Serverpfad"
+
+#: views/cache/admin_settings.php:109 views/admin_settings.twig:41
+msgid "Shift issued at"
+msgstr "Ausstellzeitpunkt des Tokens vorverlegen"
 
 #: views/cache/admin_roomsettings.php:148 views/admin_roomsettings.twig:80
 msgid "Shortinfo/Links"
@@ -588,13 +600,22 @@ msgstr "Kurzinformationen/Links"
 msgid "Show this room on rooms listing"
 msgstr "Raum in der öffentlichen Liste anzeigen"
 
-#: views/cache/admin_settings.php:186 views/admin_settings.twig:118
+#: views/cache/admin_settings.php:202 views/admin_settings.twig:134
 msgid "SSH/SFTP port number of Galène server"
 msgstr "SSH/SFTP Portnummer des Galène Servers"
 
 #: views/cache/admin_roomedit.php:319 views/admin_roomedit.twig:251
 msgid "Subgroup rooms (aka breakout rooms) can be createt"
 msgstr "Erzeugen von subgroups (aka breakout rooms) erlauben"
+
+#: views/cache/admin_settings.php:113 views/admin_settings.twig:45
+msgid ""
+"Subtract seconds from now for JWT issued time (fix time difference between "
+"Galène server and manager host)"
+msgstr ""
+"Anzahl der Sekunden, die vom Ausstellzeitpunkt des JWT Tokens subtrahiert "
+"werden sollen (um Zeitdifferenz zwischen Galène server und Manager Server "
+"auszugleichen)"
 
 #: includes/class-gal-shortcode.php:409
 msgid "Successfully deleted user from Database"
@@ -608,11 +629,11 @@ msgstr "Benutzer*in erfolgreich aus der Datenbank gelöscht"
 msgid "System settings"
 msgstr "Systemeinstellungen"
 
-#: views/cache/admin_settings.php:134 views/admin_settings.twig:66
+#: views/cache/admin_settings.php:150 views/admin_settings.twig:82
 msgid "Test access to groups directory"
 msgstr "Zugriff auf das Galène groups Verzeichnis testen"
 
-#: views/cache/admin_settings.php:288 views/admin_settings.twig:220
+#: views/cache/admin_settings.php:304 views/admin_settings.twig:236
 msgid "Test SFTP access"
 msgstr "SFTP Zugriff testen"
 
@@ -637,11 +658,15 @@ msgstr "Dieses Login ist für die erwünschte Rolle nicht registriert"
 msgid "This room does not (longer) exist"
 msgstr "Der Raum existiert nicht (mehr)"
 
-#: views/cache/admin_settings.php:239 views/admin_settings.twig:171
+#: views/cache/admin_settings.php:101 views/admin_settings.twig:33
+msgid "Token lifetime"
+msgstr "Gültigkeitsdauer des JWT Tokens"
+
+#: views/cache/admin_settings.php:255 views/admin_settings.twig:187
 msgid "Upload keyfile"
 msgstr "Schlüsseldatei hochladen"
 
-#: views/cache/admin_settings.php:255 views/admin_settings.twig:187
+#: views/cache/admin_settings.php:271 views/admin_settings.twig:203
 msgid ""
 "Upload your private key file to this app (RSA, DSA, ECDSA, EdDSA (Ed25519))"
 msgstr ""
@@ -656,7 +681,7 @@ msgstr "<b>Raumzugangscode</b> verwenden"
 msgid "Userlist successfully updated"
 msgstr "Benutzer*innenliste erfolgreich aktualisiert"
 
-#: views/cache/admin_settings.php:194 views/admin_settings.twig:126
+#: views/cache/admin_settings.php:210 views/admin_settings.twig:142
 msgid "Username"
 msgstr "Benutzer*innenname"
 
@@ -664,7 +689,7 @@ msgstr "Benutzer*innenname"
 msgid "Username for authentication"
 msgstr "Benutzer*innenname für Anmeldung"
 
-#: views/cache/admin_settings.php:208 views/admin_settings.twig:140
+#: views/cache/admin_settings.php:224 views/admin_settings.twig:156
 msgid "Username/Password"
 msgstr "Benutzer*innenname/Passwort"
 

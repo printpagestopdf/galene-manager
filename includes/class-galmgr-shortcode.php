@@ -1,17 +1,17 @@
 <?php
 
-require_once GALENE_PLUGIN_PATH . 'includes/class-gal-view-generator.php';
-require_once GALENE_PLUGIN_PATH . 'includes/class-gal-settings.php';
-require_once GALENE_PLUGIN_PATH . 'includes/class-gal-server.php';
-require_once GALENE_PLUGIN_PATH . 'includes/class-gal-room.php';
-require_once GALENE_DB_DRIVER;
+require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-view-generator.php';
+require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-settings.php';
+require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-server.php';
+require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-room.php';
+require_once GALMGR_DB_DRIVER;
 
 
 use phpseclib3\Net\SFTP;
 use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Crypt\Blowfish;
 
-class Gal_Shortcode {
+class Galmgr_Shortcode {
 	const FORM_ACTIONS=array(
 		"admin_update_room",
 		"admin_update_settings",
@@ -35,12 +35,12 @@ class Gal_Shortcode {
 	private function enqueue()
 	{
 		add_action('wp_enqueue_scripts', function(){
-		   wp_enqueue_script('galene_js');
+		   wp_enqueue_script('galmgr_js');
 
-		   wp_enqueue_style( 'galene_fw_style' );
-		   wp_enqueue_style( 'galene_fw_list_style' );
-		   wp_enqueue_style( 'galene_fw_cc_style' );
-		   wp_enqueue_style( 'galene_style' );
+		   wp_enqueue_style( 'galmgr_fw_style' );
+		   wp_enqueue_style( 'galmgr_fw_list_style' );
+		   wp_enqueue_style( 'galmgr_fw_cc_style' );
+		   wp_enqueue_style( 'galmgr_style' );
 		});
 	}
 	
@@ -48,14 +48,14 @@ class Gal_Shortcode {
 	{
 		global $wp;
 		$this->enqueue();		
-		$rooms=Gal_Room::get_rooms(true);
+		$rooms=Galmgr_Room::get_rooms(true);
 
 		ob_start();
 		
-		Gal_View_Generator::view("roomlist.twig", [
+		Galmgr_View_Generator::view("roomlist.twig", [
 			"rooms" => $rooms,
 			"d" => ($msgs != null)?array( 'msg' => $msgs ):array(),
-		],GALENE_PLUGIN_PATH . 'views/');
+		],GALMGR_PLUGIN_PATH . 'views/');
 	
 		return ob_get_clean();
 		
@@ -66,26 +66,26 @@ class Gal_Shortcode {
 		switch(@$presets['g_type'])
 		{				
 			case "presenter": //presentation
-				$presets[ 'g_type_disp' ]=__("Presenter",'galene-mgr');
+				$presets[ 'g_type_disp' ]=__("Presenter",'manager-for-galene-videoconference');
 				break;
 			
 			case "op": //operator
-				$presets[ 'g_type_disp' ]= __("Operator",'galene-mgr');
+				$presets[ 'g_type_disp' ]= __("Operator",'manager-for-galene-videoconference');
 				break;			
 			
 			case "other": // others
-				$presets[ 'g_type_disp' ]=__("Listener",'galene-mgr');
+				$presets[ 'g_type_disp' ]=__("Listener",'manager-for-galene-videoconference');
 				break;
 		}
 		
 		$this->enqueue();
 		ob_start();
 		
-		Gal_View_Generator::view("user_auth.twig", [
+		Galmgr_View_Generator::view("user_auth.twig", [
 			"room" => $room,
 			"parts" => $parts,
 			"d" => $presets,
-		],GALENE_PLUGIN_PATH . 'views/');
+		],GALMGR_PLUGIN_PATH . 'views/');
 		
 		return ob_get_clean();		
 	}
@@ -114,7 +114,7 @@ class Gal_Shortcode {
 		{
 			if( is_user_logged_in()  ) {
 				$curUser=wp_get_current_user();
-				if(Gal_DB_Driver::inst()->has_wpuser_access($room->id,$needsAuth,$curUser)) {
+				if(Galmgr_DB_Driver::inst()->has_wpuser_access($room->id,$needsAuth,$curUser)) {
 					if(!empty(@$curUser->user_nicename))
 						$displayName=$curUser->user_nicename;
 					elseif(!empty(@$curUser->display_name))
@@ -133,19 +133,19 @@ class Gal_Shortcode {
 			else
 			{
 				if ( ! wp_verify_nonce( @$args['gal_form_id'], "access_room" ) ) {
-					wp_die( __( 'There is an error in submitted data', 'galene-mgr' ),__( 'Data error', 'galene-mgr' ) ); 
+					wp_die( __( 'There is an error in submitted data', 'manager-for-galene-videoconference' ),__( 'Data error', 'manager-for-galene-videoconference' ) ); 
 				}
 	
-				$user=Gal_DB_Driver::inst()->get_user_by_login($args['galene_login']);
+				$user=Galmgr_DB_Driver::inst()->get_user_by_login($args['galene_login']);
 				if( $user === false || !password_verify( $args['galene_password'],$user["password"]))
 				{
-					$args["msg"]=[ self::error(__("Error in login data",'galene-mgr')) ];
+					$args["msg"]=[ self::error(__("Error in login data",'manager-for-galene-videoconference')) ];
 					return [false, $this->render_auth_ui($room, [ "name",  "password" ],$args) ];
 				}
 				
 				if($room->has_access($user['id'],$needsAuth) === false)
 				{
-					$args["msg"]=[ self::error(__("This login is not registered for the requested role",'galene-mgr')) ];
+					$args["msg"]=[ self::error(__("This login is not registered for the requested role",'manager-for-galene-videoconference')) ];
 					return [false, $this->render_auth_ui($room, [ "name",  "password" ],$args) ];
 				}
 				$displayName=$user['displayName'];
@@ -156,13 +156,13 @@ class Gal_Shortcode {
 		{
 			$askFor=array();
 			if((!empty(@$args['galene_code']) || !empty(@$args['galene_login'])) && !wp_verify_nonce( @$args['gal_form_id'], "access_room" )) {
-				wp_die( __( 'There is an error in submitted data', 'galene-mgr' ),__( 'Data error', 'galene-mgr' ) ); 
+				wp_die( __( 'There is an error in submitted data', 'manager-for-galene-videoconference' ),__( 'Data error', 'manager-for-galene-videoconference' ) ); 
 			}
 
 			if(!empty(@$room->needs_code) && @$args['galene_code'] !== @$room->room_accesscode )
 			{
 				if(!empty($args['galene_code']))
-					$args["msg"][]=self::error(__("Wrong code",'galene-mgr') );
+					$args["msg"][]=self::error(__("Wrong code",'manager-for-galene-videoconference') );
 				$askFor=[ "code", "name" ];
 			}
 			
@@ -184,10 +184,10 @@ class Gal_Shortcode {
 		if(!empty($args['galene_login']) && !empty($args['galene_password']))
 		{
 			if ( ! wp_verify_nonce( @$args['gal_form_id'], "admin_auth" ) ) {
-				wp_die( __( 'There is an error in submitted data', 'galene-mgr' ),__( 'Data error', 'galene-mgr' ) ); 
+				wp_die( __( 'There is an error in submitted data', 'manager-for-galene-videoconference' ),__( 'Data error', 'manager-for-galene-videoconference' ) ); 
 			}
 		
-			$user=Gal_DB_Driver::inst()->get_user_by_login($args['galene_login']);
+			$user=Galmgr_DB_Driver::inst()->get_user_by_login($args['galene_login']);
 			if($user !== false && $user['isAdmin'] == 1 && password_verify( $args['galene_password'],$user["password"])) 
 			{
 				$_SESSION['galene_user']=$user['id'];
@@ -201,7 +201,7 @@ class Gal_Shortcode {
 		{
 			if( is_user_logged_in()  ) {
 				$curUser=wp_get_current_user();
-				if ( in_array( GALENE_WP_ROLE_NAME, (array) $curUser->roles ) ) {
+				if ( in_array( GALMGR_WP_ROLE_NAME, (array) $curUser->roles ) ) {
 					$_SESSION['galene_user']=-1 * abs($curUser->ID); //negative id for wp user
 					$_SESSION['galene_is_logged_in']=true;
 					session_write_close();
@@ -219,10 +219,10 @@ class Gal_Shortcode {
 			];
 			if($login_error) 
 			{
-				$params['d']=array( 'msg' => [ self::error(__("Error in login data",'galene-mgr')) ] );
+				$params['d']=array( 'msg' => [ self::error(__("Error in login data",'manager-for-galene-videoconference')) ] );
 			}
 		
-			Gal_View_Generator::view("admin_auth.twig", $params,GALENE_PLUGIN_PATH . 'views/');
+			Galmgr_View_Generator::view("admin_auth.twig", $params,GALMGR_PLUGIN_PATH . 'views/');
 			
 			return ob_get_clean();					
 		}
@@ -247,9 +247,8 @@ class Gal_Shortcode {
 				case 'admin_screen_roomedit':
 					if(@$args['galene_subaction'] == 'new_room')
 					{
-						// $room=json_decode(file_get_contents(GALENE_PLUGIN_PATH . "views/roomtpl_{$args['new_room_preset']}.json"),true);
-						$room=json_decode(file_get_contents(GALENE_PLUGIN_PATH . "views/roomtpl_{$args['new_room_preset']}.json"));
-						$room->key64=Gal_util::secret_h256_base64();
+						$room=json_decode(file_get_contents(GALMGR_PLUGIN_PATH . "views/roomtpl_{$args['new_room_preset']}.json"));
+						$room->key64=Galmgr_util::secret_h256_base64();
 						if(@$room->access == "code")
 							$room->room_accesscode= sprintf("%06d",random_int(1, 999999));
 						 $args['galene_room']=-1;
@@ -257,14 +256,14 @@ class Gal_Shortcode {
 					}
 					else
 					{
-						$d['room'] = new Gal_Room($args['galene_room']);
-						$d['local_url']=Gal_util::host_url() . Gal_util::add_arg([
+						$d['room'] = new Galmgr_Room($args['galene_room']);
+						$d['local_url']=Galmgr_util::host_url() . Galmgr_util::add_arg([
 								"galene_room" => $args['galene_room'] ,
 								"galene_action" => 'access_room',
 							]);
-						$d['room_urls']=Gal_Room::room_urls($d['room']->id);
+						$d['room_urls']=Galmgr_Room::room_urls($d['room']->id);
 
-						$d['iframe_src']=Gal_util::add_arg([ 'galene_action' => 'admin_screen_userselect', 'galene_room' => $args['galene_room'] ]);
+						$d['iframe_src']=Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_userselect', 'galene_room' => $args['galene_room'] ]);
 						$d['users'] = $d['room']->get_access(false);
 						$d['active_tab']=@$args['active_tab']?$args['active_tab']:'settings-tab';
 					}
@@ -277,7 +276,7 @@ class Gal_Shortcode {
 						$d['user'] = array( 'id' => -1, 'displayName' => '', 'login' => '', );
 					}
 					else {
-						$d['user'] = Gal_DB_Driver::inst()->get_user($args['galene_user']);		
+						$d['user'] = Galmgr_DB_Driver::inst()->get_user($args['galene_user']);		
 					}
 					break;
 					
@@ -285,22 +284,22 @@ class Gal_Shortcode {
 					$d['admin_screen_roomsettings']=" is-active ";
 					// $gs=new GaleneStorage();
 					// $d['rooms'] = $gs->get_rooms();
-					$d['rooms'] = Gal_Room::get_rooms();
+					$d['rooms'] = Galmgr_Room::get_rooms();
 					break;
 									
 				case 'admin_screen_userselect':
-					$d['users'] = Gal_Room::get_room_access($args['galene_room']);
+					$d['users'] = Galmgr_Room::get_room_access($args['galene_room']);
 					$d['room']=$args['galene_room'];
 					$d['room_display_name']=@$args['room_display_name'];
 					break;
 					
 				case 'admin_screen_usersettings':
 					$d['admin_screen_usersettings']=" is-active ";
-					$d['users'] = Gal_DB_Driver::inst()->get_users();
+					$d['users'] = Galmgr_DB_Driver::inst()->get_users();
 					break;
 				
 				case 'admin_screen_settings':
-					$d['settings']=Gal_Settings::inst()->get_settings();
+					$d['settings']=Galmgr_Settings::inst()->get_settings();
 					break;
 				
 				default:
@@ -321,11 +320,11 @@ class Gal_Shortcode {
 			$this->enqueue();
 			ob_start();
 
-			Gal_View_Generator::view($template, [
+			Galmgr_View_Generator::view($template, [
 				"args" => $args,
 				"d" => $d,
 				"is_admin" => true,
-			],GALENE_PLUGIN_PATH . 'views/');
+			],GALMGR_PLUGIN_PATH . 'views/');
 			
 			return ob_get_clean();					
 		
@@ -340,35 +339,35 @@ class Gal_Shortcode {
 					if($args['galene_room'] < 0)
 					{
 						$prevRoomJSON=null;
-						$room=new Gal_Room($args);
+						$room=new Galmgr_Room($args);
 						$room->store();
 						$args['galene_room']=$room->id;
 					}
 					else
 					{
-						$prevRoomJSON=(new Gal_Room($args['galene_room']))->get_json();
-						$room=new Gal_Room($args);
+						$prevRoomJSON=(new Galmgr_Room($args['galene_room']))->get_json();
+						$room=new Galmgr_Room($args);
 						$room->store();
 					}
 
-					$msgs[]=self::success( __("Data successfully saved",'galene-mgr') );
+					$msgs[]=self::success( __("Data successfully saved",'manager-for-galene-videoconference') );
 
-					if(Gal_Server::inst()->can_write)
+					if(Galmgr_Server::inst()->can_write)
 					{
 						$r=$room->get_json();
 						
 						if($prevRoomJSON == null || $prevRoomJSON != $r)
 						{
-							if(Gal_Server::inst()->put_file($r->filename,$r->json) !== false)
-								$msgs[]=self::success(__("Data succesfully saved on Galène server",'galene-mgr'));
+							if(Galmgr_Server::inst()->put_file($r->filename,$r->json) !== false)
+								$msgs[]=self::success(__("Data succesfully saved on Galène server",'manager-for-galene-videoconference'));
 							else
-								$msgs[]=self::error(__("Error saving data on Galène server",'galene-mgr'));
+								$msgs[]=self::error(__("Error saving data on Galène server",'manager-for-galene-videoconference'));
 						}
 					}
 				} catch( Exception $e) {
 
 					$msgs[]=self::error($e->getMessage());
-					$msgs[]=self::error(__("Error saving Data, nothing saved!",'galene-mgr'));
+					$msgs[]=self::error(__("Error saving Data, nothing saved!",'manager-for-galene-videoconference'));
 				}
 				
 				return $this->galene_admin_main([
@@ -380,23 +379,23 @@ class Gal_Shortcode {
 			
 			case "admin_room_delete":
 					$msgs=array();
-					$room=new Gal_Room($args['galene_room']);
+					$room=new Galmgr_Room($args['galene_room']);
 					$serverFileName=$room->serverFileName;
 					if($room->delete($args['galene_room']) !== false)
 					{
-						$msgs[]=self::success(__("Room deleted from manager Database",'galene-mgr'));
-						if(Gal_Server::inst()->delete_file($serverFileName) !== false)
-							$msgs[]=self::success(__("Room config on Galène server successfully deleted",'galene-mgr'));
+						$msgs[]=self::success(__("Room deleted from manager Database",'manager-for-galene-videoconference'));
+						if(Galmgr_Server::inst()->delete_file($serverFileName) !== false)
+							$msgs[]=self::success(__("Room config on Galène server successfully deleted",'manager-for-galene-videoconference'));
 						else
-							$msgs[]=self::error(__("Error deleting room config from Galène server",'galene-mgr'));
+							$msgs[]=self::error(__("Error deleting room config from Galène server",'manager-for-galene-videoconference'));
 					}
 					else
-						$msgs[]=self::error(__("Error deleting room from manager Database",'galene-mgr'));
+						$msgs[]=self::error(__("Error deleting room from manager Database",'manager-for-galene-videoconference'));
 					
 					$msgid=uniqid('roomsettings');
 					set_transient($msgid,$msgs,60);
 
-					$url=Gal_util::set_query_args( ['galene_action' => 'admin_screen_roomsettings', 'msgid' => $msgid ] );
+					$url=Galmgr_util::set_query_args( ['galene_action' => 'admin_screen_roomsettings', 'msgid' => $msgid ] );
 					wp_redirect($url,303);
 					exit;
 					break;
@@ -404,17 +403,17 @@ class Gal_Shortcode {
 			case "admin_user_delete":
 					$msgs=array();
 
-					if(Gal_DB_Driver::inst()->delete_user($args['galene_user']) !== false)
+					if(Galmgr_DB_Driver::inst()->delete_user($args['galene_user']) !== false)
 					{
-						$msgs[]=self::success(__("Successfully deleted user from Database",'galene-mgr'));
+						$msgs[]=self::success(__("Successfully deleted user from Database",'manager-for-galene-videoconference'));
 					}
 					else
-						$msgs[]=self::error(__("Error deleting user from Database",'galene-mgr'));
+						$msgs[]=self::error(__("Error deleting user from Database",'manager-for-galene-videoconference'));
 
 					$msgid=uniqid('usersettings');
 					set_transient($msgid,$msgs,60);
 
-					$url=Gal_util::set_query_args( ['galene_action' => 'admin_screen_usersettings', 'msgid' => $msgid ] );
+					$url=Galmgr_util::set_query_args( ['galene_action' => 'admin_screen_usersettings', 'msgid' => $msgid ] );
 					wp_redirect($url,303);
 					exit;
 					break;
@@ -427,7 +426,7 @@ class Gal_Shortcode {
 						return $this->galene_admin_main([
 							'galene_action' => 'admin_screen_useredit',
 							'galene_user' => $args['galene_user'],
-							'msg' => [ self::error(__("Password repeat does not match Password",'galene-mgr')) ],
+							'msg' => [ self::error(__("Password repeat does not match Password",'manager-for-galene-videoconference')) ],
 						]);
 					}
 					else
@@ -439,28 +438,28 @@ class Gal_Shortcode {
 				}
 
 				if($args['galene_user'] < 0 ) //new user
-					$args['galene_user']=Gal_DB_Driver::inst()->insert_user($args);
+					$args['galene_user']=Galmgr_DB_Driver::inst()->insert_user($args);
 				else
-					Gal_DB_Driver::inst()->update_user($args);
+					Galmgr_DB_Driver::inst()->update_user($args);
 				
 				return $this->galene_admin_main([
 					'galene_action' => 'admin_screen_useredit',
 					'galene_user' => $args['galene_user'],
-					'msg' => [ self::success(__("Data successfully saved",'galene-mgr')) ],
+					'msg' => [ self::success(__("Data successfully saved",'manager-for-galene-videoconference')) ],
 				]);
 				break;
 				
 			case "admin_update_userselect":
 				if(!empty(@$args['acc']))
-					Gal_Room::set_room_access( $args['galene_room'],$args['acc']);
+					Galmgr_Room::set_room_access( $args['galene_room'],$args['acc']);
 				else
-					Gal_Room::set_room_access( $args['galene_room'],array());
+					Galmgr_Room::set_room_access( $args['galene_room'],array());
 
-				$msgs=array(self::success(__("Userlist successfully updated",'galene-mgr')));
+				$msgs=array(self::success(__("Userlist successfully updated",'manager-for-galene-videoconference')));
 				$msgid=uniqid('userselect');
 				set_transient($msgid,$msgs,60);
 
-				$url=Gal_util::set_query_args( ['galene_action' => 'admin_screen_roomedit', 
+				$url=Galmgr_util::set_query_args( ['galene_action' => 'admin_screen_roomedit', 
 											'galene_room' => $args['galene_room'], 
 											'active_tab' => 'privileges-tab',
 											'msgid' => $msgid ] ) . '#userlist';
@@ -470,7 +469,7 @@ class Gal_Shortcode {
 				return $this->galene_admin_main([
 					'galene_action' => 'admin_screen_userselect',
 					'galene_room' => $args['galene_room'],
-					'msg' => [ self::success(__("Data successfully saved",'galene-mgr') ) ],
+					'msg' => [ self::success(__("Data successfully saved",'manager-for-galene-videoconference') ) ],
 				]);
 				break;
 				
@@ -482,7 +481,7 @@ class Gal_Shortcode {
 				break;
 			
 			case "admin_download_room_json":
-				$r=(new Gal_Room($args['galene_room']))->get_json();
+				$r=(new Galmgr_Room($args['galene_room']))->get_json();
 				ob_clean();
 				echo $r->json;
 				
@@ -500,17 +499,17 @@ class Gal_Shortcode {
 				
 			case "admin_update_settings":
 				// error_log(print_r($_REQUEST,true));
-				Gal_Settings::inst()->update($args);
+				Galmgr_Settings::inst()->update($args);
 				
 				return $this->galene_admin_main([
 					'galene_action' => 'admin_screen_settings',
-					'msg' => [ self::success(__("Data successfully saved",'galene-mgr')) ],
+					'msg' => [ self::success(__("Data successfully saved",'manager-for-galene-videoconference')) ],
 				]);				
 				break;
 				
 			case "admin_test_galene_access":
 				ob_clean();
-				$result=Gal_Server::inst()->test_connection();
+				$result=Galmgr_Server::inst()->test_connection();
 				echo <<< HEAD
 				<html>
 				<head>
@@ -530,7 +529,7 @@ HEAD;
 
 				foreach($result as $line)
 				{
-					echo "<tr><td>{$line[0]}</td><td>{$line[1]}</td></tr>";
+					echo "<tr><td>" . wp_kses_post($line[0]) . "</td><td>" . wp_kses_post($line[1]) . "</td></tr>";
 				}
 				echo "</tbody></table></body></html>";
 				ob_end_flush();
@@ -550,8 +549,8 @@ HEAD;
 		
 		if(!empty(@$_REQUEST['galenc']))
 		{
-			// $enc_args=json_decode(Gal_util::base64url_decode($_REQUEST['galenc']),true);
-			$enc_args=Gal_util::decode_url_param($_REQUEST['galenc']);
+			// $enc_args=json_decode(Galmgr_util::base64url_decode($_REQUEST['galenc']),true);
+			$enc_args=Galmgr_util::decode_url_param($_REQUEST['galenc']);
 			$req_args=array_merge($enc_args,$_POST);			
 		}
 		else
@@ -559,7 +558,7 @@ HEAD;
 		
 		if(in_array(@$req_args['galene_action'], self::FORM_ACTIONS)) {
 			if ( ! wp_verify_nonce( @$req_args['gal_form_id'], @$req_args['galene_action'] ) ) {
-				wp_die( __( 'There is an error in submitted data', 'galene-mgr' ),__( 'Data error', 'galene-mgr' ) ); 
+				wp_die( __( 'There is an error in submitted data', 'manager-for-galene-videoconference' ),__( 'Data error', 'manager-for-galene-videoconference' ) ); 
 			}			
 		}
 
@@ -568,11 +567,11 @@ HEAD;
 		switch(@$req_args['galene_action'])
 		{			
 			case "access_room":
-				$settings=Gal_Settings::inst()->get_settings();
+				$settings=Galmgr_Settings::inst()->get_settings();
 
-				$room=new Gal_Room($req_args['galene_room']);
+				$room=new Galmgr_Room($req_args['galene_room']);
 
-				if($room === false) return $this->render_main([ self::error(__("This room does not (longer) exist",'galene-mgr')) ]);
+				if($room === false) return $this->render_main([ self::error(__("This room does not (longer) exist",'manager-for-galene-videoconference')) ]);
 
 				list($auth_check, $content)=$this->check_auth($room,$req_args);
 				
@@ -596,9 +595,9 @@ HEAD;
 						break;
 				}
 				
-				$nickname=(empty(@$room->needs_nickname) && empty(@$content))?Gal_util::random_name():@$content;
+				$nickname=(empty(@$room->needs_nickname) && empty(@$content))?Galmgr_util::random_name():@$content;
 				
-				$room_auth=Gal_util::get_room_auth_link(
+				$room_auth=Galmgr_util::get_room_auth_link(
 					trailingslashit(trailingslashit($settings['general']['galene_url']) . $room->galene_group),
 					['sub' => $nickname, 'permissions' => $perms ],
 					$room->key64, $settings	);
@@ -617,40 +616,7 @@ HEAD;
 		return "Sorry something went wrong";						
 		
 	}
-	
-	// private function secret_h256_base64()
-	// {
-	// 	$secret = random_bytes(32);
-	// 	return Gal_Util::base64url_encode($secret);
-	// }
-	
-	// private function simple_token($ar_header,$ar_payload,$secret)
-	// {
-	// 	// Create token header as a JSON string
-	// 	$header = json_encode($ar_header);
-
-	// 	// Create token payload as a JSON string
-	// 	$payload = json_encode($ar_payload);
-
-	// 	// Encode Header to Base64Url String
-	// 	$base64UrlHeader = Gal_Util::base64url_encode($header);
-
-	// 	// Encode Payload to Base64Url String
-	// 	$base64UrlPayload = Gal_Util::base64url_encode($payload);
-
-	// 	// Create Signature Hash
-	// 	$signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $secret, true);
-
-	// 	// Encode Signature to Base64Url String
-	// 	$base64UrlSignature = Gal_util::base64url_encode($signature);
-
-	// 	// Create JWT
-	// 	$jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
-
-	// 	return $jwt;
-		
-	// }
-		
+			
 	public static function success($msg)
 	{
 		return self::msg("",$msg,"is-success");
@@ -671,6 +637,6 @@ HEAD;
 			);
 	}
 			
-} //class Gal_Shortcode
+} //class Galmgr_Shortcode
 
-Gal_Shortcode::get_instance();
+Galmgr_Shortcode::get_instance();

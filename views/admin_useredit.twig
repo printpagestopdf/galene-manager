@@ -3,50 +3,50 @@
 {% block content %}
 <form class="box" method="POST">
 	{% wp_nonce_field("admin_update_user","gal_form_id",false,true) %}
-	<input type="hidden" name="galene_user" id="galene_user" value="{{ $d['user']['id'] }}" >
+	<input type="hidden" name="galene_user" id="galene_user" value="{{{ $d['user']['id'] }}}" >
 	<p class="panel-heading mb-3">
-		{{ __("Edit user",'galene-mgr') }}: {{ $d['user']['displayName'] }}
+		{{ __("Edit user",'manager-for-galene-videoconference') }}: {{ $d['user']['displayName'] }}
 	</p>
 
 	<div class="tab-content" >
 		
-		{% if ($d['user']['type'] == 0): %}
+		{% if (@$d['user']['type'] == 0): %}
 		<div class="field">
-		  <label class="label">{{ __("Display name",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Display name",'manager-for-galene-videoconference') }}</label>
 		  <div class="control">
-			<input name="displayName" id="displayName" class="input" type="text" value="{{ $d['user']['displayName'] }} " >
+			<input name="displayName" id="displayName" class="input" type="text" value="{{{ $d['user']['displayName'] }}} " >
 		  </div>
-		  <p class="help">{{ __("Name that will be used during session",'galene-mgr') }}</p>
+		  <p class="help">{{ __("Name that will be used during session",'manager-for-galene-videoconference') }}</p>
 		</div> 
 		<div class="field">
-		  <label class="label">{{ __("Loginname",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Loginname",'manager-for-galene-videoconference') }}</label>
 		  <div class="control">
-			<input name="login" id="login" class="input" type="text" value="{{ $d['user']['login'] }}" >
+			<input name="login" id="login" class="input" type="text" value="{{{ $d['user']['login'] }}}" >
 		  </div>
-		  <p class="help">{{ __("Username for authentication",'galene-mgr') }}</p>
+		  <p class="help">{{ __("Username for authentication",'manager-for-galene-videoconference') }}</p>
 		</div> 
 
 		<div class="field">
-		  <label class="label">{{ __("Password",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Password",'manager-for-galene-videoconference') }}</label>
 		  <div class="control">
 			<input name="password_new" id="password_new" class="input" type="password"  >
 		  </div>
-		  <p class="help">{{ __("Login password, only use for new user or password change otherwise empty",'galene-mgr') }}</p>
+		  <p class="help">{{ __("Login password, only use for new user or password change otherwise empty",'manager-for-galene-videoconference') }}</p>
 		</div> 
 
 		<div class="field">
-		  <label class="label">{{ __("Password (repeat)",'galene-mgr') }}</label>
+		  <label class="label">{{ __("Password (repeat)",'manager-for-galene-videoconference') }}</label>
 		  <div class="control">
 			<input class="input" name="password_repeat" id="password_repeat" type="password"  >
 		  </div>
-		  <p class="help">{{ __("Password (repeat)",'galene-mgr') }}</p>
+		  <p class="help">{{ __("Password (repeat)",'manager-for-galene-videoconference') }}</p>
 		</div> 
 		<div class="field">
 			<label class="checkbox">
-			  <input type="checkbox" name="isAdmin" id="isAdmin" {{ (@$d['user']['isAdmin'] == 1 )?'checked':'' }} >
-			  {{ __("Is administrator",'galene-mgr') }}
+			  <input type="checkbox" name="isAdmin" id="isAdmin" {{{ (@$d['user']['isAdmin'] == 1 )?'checked':'' }}} >
+			  {{ __("Is administrator",'manager-for-galene-videoconference') }}
 			</label>
-			<p class="help">{{ __("If checked this user can login to the Galène manager (not room operator)",'galene-mgr') }}</p>
+			<p class="help">{{ __("If checked this user can login to the Galène manager (not room operator)",'manager-for-galene-videoconference') }}</p>
 		</div>			
 		{% endif; %}
 
@@ -57,12 +57,12 @@
 	<div class="field is-grouped is-grouped-right mt-3">
 	  <p class="control">
 		<button class="button is-primary" type="submit" name="galene_action" id="galene_action" value="admin_update_user" >
-		  {{ __("Save",'galene-mgr') }}
+		  {{ __("Save",'manager-for-galene-videoconference') }}
 		</button>
 	  </p>
 	  <p class="control">
-		<a class="button is-light" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_usersettings' ]) %}">
-		  {{ __("Cancel",'galene-mgr') }}
+		<a class="button is-light" href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_usersettings' ])) %}">
+		  {{ __("Cancel",'manager-for-galene-videoconference') }}
 		</a>
 	  </p>
 	</div>

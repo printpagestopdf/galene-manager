@@ -1,6 +1,6 @@
 <?php
 
-class Gal_Template_Registrar {
+class Galmgr_Template_Registrar {
 
 	/**
 	 * A reference to an instance of this class.
@@ -67,7 +67,7 @@ class Gal_Template_Registrar {
 
 		// Add your templates to this array.
 		$this->templates = array(
-			'../templates/gal-app.php' => __('Galène video conferencing manager','galene-mgr'),
+			'../templates/template-galmgr-app.php' => __('Galène video conferencing manager','manager-for-galene-videoconference'),
 		);
 			
 	} 
@@ -149,4 +149,4 @@ class Gal_Template_Registrar {
 	}
 
 } 
-add_action( 'plugins_loaded', array( 'Gal_Template_Registrar', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'Galmgr_Template_Registrar', 'get_instance' ) );

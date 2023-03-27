@@ -5,15 +5,15 @@
 <input type="hidden" name="galene_action" id="galene_action" value="admin_screen_useredit" >
 <nav class="panel">
 	<div class="panel-heading columns mx-0 p-0 my-2">
-		<div class="column my-auto">{{ __("Users",'galene-mgr') }}</div>
+		<div class="column my-auto">{{ __("Users",'manager-for-galene-videoconference') }}</div>
 		<div class="column field is-grouped is-grouped-right is-align-self-center py-0">
 			<div class="control">
-			<a  class="button is-outlined is-primary has-text-weight-normal" title="{{ __("Create a new user configuration",'galene-mgr') }}"
-				href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_screen_useredit' ]) %}" >
+			<a  class="button is-outlined is-primary has-text-weight-normal" title="{{{ __("Create a new user configuration",'manager-for-galene-videoconference') }}}"
+				href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_useredit' ])) %}" >
 				<figure class="image is-16x16 mr-2">
-				  <img src="{{ GALENE_PLUGIN_URL }}/assets/magic-wand-outline.svg">
+				  <img src="{% echo esc_url(GALMGR_PLUGIN_URL . '/assets/magic-wand-outline.svg') %}">
 				</figure>
-				  {{ __("New user",'galene-mgr') }}
+				  {{ __("New user",'manager-for-galene-videoconference') }}
 			</a>
 		</div>
 		</div>
@@ -23,26 +23,26 @@
   <label class="panel-block is-block" >
 	<div class="columns">
 		<div class="column is-narrow">	
-			<a class="image-button" title="{{ __("Edit user",'galene-mgr') }}"
-			href="{{ Gal_util::add_arg([ 'galene_action' => 'admin_screen_useredit', 'galene_user' => $user['id'] ]) }}"  >
+			<a class="image-button" title="{{{ __("Edit user",'manager-for-galene-videoconference') }}}"
+			href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_useredit', 'galene_user' => $user['id'] ])) %}"  >
 				<figure class="image is-24x24 mx-2">
-				<img src="{{ GALENE_PLUGIN_URL }}/assets/edit-outline.svg">
+				<img src="{% echo esc_url(GALMGR_PLUGIN_URL . '/assets/edit-outline.svg') %}">
 				</figure>
 			</a>
 		</div>
 		<div class="column">
-			<a class="is-underlined"  title="{{ __("Display name",'galene-mgr') }}"
-			href="{{ Gal_util::add_arg([ 'galene_action' => 'admin_screen_useredit', 'galene_user' => $user['id'] ]) }}"  >
+			<a class="is-underlined"  title="{{{ __("Display name",'manager-for-galene-videoconference') }}}"
+			href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_screen_useredit', 'galene_user' => $user['id'] ])) %}"  >
 				{{ $user['displayName'] }}
 			</a>
 		</div>
-		<div class="column is-cursor-default" title="{{ __("Loginname",'galene-mgr') }}">{{ $user['login'] }}</div>
-		<div class="column is-cursor-default" title="{{ __("Is administrator",'galene-mgr') }}">{{ $user['isAdmin']?'(Admin)':'' }}</div>
-		<div class="column is-narrow" title="{{ __("Permanently delete this user",'galene-mgr') }}">	
-			<a  onclick="return confirm('{{ __("Do you really want to delete this user? All data are lost.",'galene-mgr') }}');" 
-				class="image-button" href="{% echo Gal_util::add_arg([ 'galene_action' => 'admin_user_delete', 'galene_user' => $user['id'] ]) %}"  >
+		<div class="column is-cursor-default" title="{{{ __("Loginname",'manager-for-galene-videoconference') }}}">{{ $user['login'] }}</div>
+		<div class="column is-cursor-default" title="{{{ __("Is administrator",'manager-for-galene-videoconference') }}}">{{ $user['isAdmin']?'(Admin)':'' }}</div>
+		<div class="column is-narrow" title="{{{ __("Permanently delete this user",'manager-for-galene-videoconference') }}}">	
+			<a  onclick="return confirm('{{ __("Do you really want to delete this user? All data are lost.",'manager-for-galene-videoconference') }}');" 
+				class="image-button" href="{% echo esc_url(Galmgr_util::add_arg([ 'galene_action' => 'admin_user_delete', 'galene_user' => $user['id'] ])) %}"  >
 				<figure class="image is-24x24 mx-2">
-				  <img src="{{ GALENE_PLUGIN_URL }}/assets/trash-outline.svg">
+				  <img src="{% echo esc_url(GALMGR_PLUGIN_URL . '/assets/trash-outline.svg') %}">
 				</figure>
 			</a>
 		</div>

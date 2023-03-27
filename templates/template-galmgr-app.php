@@ -7,18 +7,18 @@
 add_filter( 'show_admin_bar', '__return_false' );
 
 add_action('wp_enqueue_scripts', function(){
-   wp_enqueue_script('galene_js');
+   wp_enqueue_script('galmgr_js');
 
-   wp_enqueue_style( 'galene_fw_style' );
-   wp_enqueue_style( 'galene_fw_list_style' );
-   wp_enqueue_style( 'galene_fw_cc_style' );
-   wp_enqueue_style( 'galene_style' );
+   wp_enqueue_style( 'galmgr_fw_style' );
+   wp_enqueue_style( 'galmgr_fw_list_style' );
+   wp_enqueue_style( 'galmgr_fw_cc_style' );
+   wp_enqueue_style( 'galmgr_style' );
 });
 
 //remove all non galene stylesheets
 add_filter( "print_styles_array", function ($to_do) { 
 	$filt_to_do=array_filter($to_do,function($var) {
-		return (strpos($var,"galene_") === 0);
+		return (strpos($var,"galmgr_") === 0);
 	});
 	return $filt_to_do; 
 }, 10, 1 );

@@ -3,7 +3,7 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     die;
 }
 
-class Gal_Uninstall {
+class Galmgr_Uninstall {
 	
 	public function uninstall()
 	{
@@ -37,7 +37,7 @@ class Gal_Uninstall {
 	
 }
 
-$uninst=new Gal_Uninstall();
+$uninst=new Galmgr_Uninstall();
 $uninst->uninstall();
 
 ?>

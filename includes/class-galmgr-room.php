@@ -1,8 +1,8 @@
 <?php
-require_once GALENE_PLUGIN_PATH . 'includes/class-gal-util.php';
-require_once GALENE_DB_DRIVER;
+require_once GALMGR_PLUGIN_PATH . 'includes/class-galmgr-util.php';
+require_once GALMGR_DB_DRIVER;
 
-class Gal_Room
+class Galmgr_Room
 {
 	private $_urls=null;
 
@@ -36,14 +36,14 @@ class Gal_Room
 		}
 		elseif( is_numeric($data)) {
 			$this->id=$data;
-			$this->update(Gal_DB_Driver::inst()->get_object($this));			
+			$this->update(Galmgr_DB_Driver::inst()->get_object($this));			
 		}
 		
 	}
 
 	public function update($fields) 
 	{
-		$pub_props=Gal_util::get_public_props($this);
+		$pub_props=Galmgr_util::get_public_props($this);
 
 		foreach($pub_props as $key => $value)
 		{
@@ -67,18 +67,18 @@ class Gal_Room
 			throw new Exception( "<ul class='my-0 inside'><li>" . implode("</li><li>",$errorMsgs) . "</li></ul>");
 		}
 
-		$result=Gal_DB_Driver::inst()->store_object($this);
+		$result=Galmgr_DB_Driver::inst()->store_object($this);
 		if($result === false)
-			throw new Exception(__("Error saving Data, nothing saved!",'galene-mgr'));
+			throw new Exception(__("Error saving Data, nothing saved!",'manager-for-galene-videoconference'));
 		
 		return $result;
 	}
 
 	public function delete()
 	{
-		if(Gal_DB_Driver::inst()->delete_records("galene_room",$this->id) !== false)
+		if(Galmgr_DB_Driver::inst()->delete_records("galene_room",$this->id) !== false)
 		{
-			Gal_DB_Driver::inst()->delete_records("galene_access",$this->id,"room_id");
+			Galmgr_DB_Driver::inst()->delete_records("galene_access",$this->id,"room_id");
 			return true;
 		}
 		else
@@ -88,7 +88,7 @@ class Gal_Room
 
 	public function has_access($userID, $role)
 	{
-		return Gal_DB_Driver::inst()->has_room_access($this->id,$userID,$role);
+		return Galmgr_DB_Driver::inst()->has_room_access($this->id,$userID,$role);
 	}
 
 	public function get_access($full=true)
@@ -98,12 +98,12 @@ class Gal_Room
 
 	public static function get_room_access($roomID, $full=true)
 	{
-		return Gal_DB_Driver::inst()->get_room_access($roomID, $full);
+		return Galmgr_DB_Driver::inst()->get_room_access($roomID, $full);
 	}
 		
 	public static function set_room_access($roomID, $acc)
 	{
-		return Gal_DB_Driver::inst()->set_room_access($roomID, $acc);
+		return Galmgr_DB_Driver::inst()->set_room_access($roomID, $acc);
 	}
 		
 	public function __get($prop) {
@@ -125,7 +125,7 @@ class Gal_Room
 	}
 	
 	public static function get_rooms($public_only=false) {
-		$rooms=Gal_DB_Driver::inst()->get_rooms();
+		$rooms=Galmgr_DB_Driver::inst()->get_rooms();
 		foreach($rooms as $room)
 		{
 			if($public_only && @$room['show_on_roomslist'] !== true) continue;
@@ -137,15 +137,15 @@ class Gal_Room
 	private function validate()
 	{
 		$errorMsgs=array();
-		if(empty($this->displayName)) $errorMsgs[]=__("Display name must not be empty",'galene-mgr');
-		if(empty($this->key64)) $terrorMsgs[]=__("Missing valid Galène key",'galene-mgr');
+		if(empty($this->displayName)) $errorMsgs[]=__("Display name must not be empty",'manager-for-galene-videoconference');
+		if(empty($this->key64)) $terrorMsgs[]=__("Missing valid Galène key",'manager-for-galene-videoconference');
 		if(empty($this->galene_group)) {
-			$errorMsgs[]=__("Galène group must not be empty",'galene-mgr');
+			$errorMsgs[]=__("Galène group must not be empty",'manager-for-galene-videoconference');
 		}
 		else {
-			$recs=Gal_DB_Driver::inst()->get_records('galene_room',null," where galene_group = \"{$this->galene_group}\" ");
+			$recs=Galmgr_DB_Driver::inst()->get_records('galene_room',null," where galene_group = \"{$this->galene_group}\" ");
 			if( count($recs) > 1 || (count($recs) == 1 && $recs[0]['id'] != $this->id))
-				$errorMsgs[]=__("This Galène group is already in use: ",'galene-mgr') . ": " . $this->galene_group;
+				$errorMsgs[]=__("This Galène group is already in use: ",'manager-for-galene-videoconference') . ": " . $this->galene_group;
 		}
 				
 		return $errorMsgs;
@@ -162,7 +162,7 @@ class Gal_Room
 					"alg" => "HS256",
 					"key_ops" => ["sign","verify"],
 					"k" => $this->key64,
-					"kid" => GALENE_ROOM_AUTH_KID
+					"kid" => GALMGR_ROOM_AUTH_KID
 				],
 			],
 			"comment" => "created by galene Manager Addon",
@@ -187,24 +187,24 @@ class Gal_Room
 		
 	public static function room_urls($id) 
 	{
-		$host=Gal_util::host_url();
+		$host=Galmgr_util::host_url();
 		
 		return array(
-			"choose" => Gal_util::encode_url_param_ar($host,[
+			"choose" => Galmgr_util::encode_url_param_ar($host,[
 							"galene_room" => $id ,
 							"galene_action" => 'access_room',
 						]),
-			"recipient" => Gal_util::encode_url_param_ar($host,[
+			"recipient" => Galmgr_util::encode_url_param_ar($host,[
 							"galene_room" => $id ,
 							"galene_action" => 'access_room',
 							"g_type" => 'other',
 						]),
-			"presenter" =>  Gal_util::encode_url_param_ar($host,[
+			"presenter" =>  Galmgr_util::encode_url_param_ar($host,[
 							"galene_room" => $id ,
 							"galene_action" => 'access_room',
 							"g_type" => 'presenter',
 						]),
-			"admin" => Gal_util::encode_url_param_ar($host,[
+			"admin" => Galmgr_util::encode_url_param_ar($host,[
 							"galene_room" => $id ,
 							"galene_action" => 'access_room',
 							"g_type" => 'op',

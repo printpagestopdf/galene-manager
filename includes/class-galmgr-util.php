@@ -1,6 +1,6 @@
 <?php
 	
-class Gal_util {
+class Galmgr_util {
 
 	public static function translate_wprole($wpRoleName)
 	{
@@ -15,7 +15,7 @@ class Gal_util {
 	public static function add_arg($args)
 	{
 		$enc_args=array_map(function($val){ return rawurlencode($val); },$args);
-		return esc_url(add_query_arg($enc_args,remove_query_arg(['active_tab', 'galene_room','galene_action','room_display_name', 'msgid'])));
+		return esc_url(add_query_arg($enc_args,remove_query_arg(['galene_user','active_tab', 'galene_room','galene_action','room_display_name', 'msgid'])));
 	}
 	
 	public static function set_query_args($args)
@@ -93,7 +93,7 @@ class Gal_util {
 
 	public static function simple_token($ar_header,$ar_payload,$secret)
 	{
-		// Create token header as a JSON string
+		// Create token header as a JSON stringGal_
 		$header = json_encode($ar_header);
 
 		// Create token payload as a JSON string
@@ -128,7 +128,7 @@ class Gal_util {
 			];
 		
 		$secret=self::base64url_decode($secret64);
-		$token=self::simple_token(['typ' => 'JWT', 'alg' => 'HS256', 'kid' => GALENE_ROOM_AUTH_KID ],$payload,$secret);	
+		$token=self::simple_token(['typ' => 'JWT', 'alg' => 'HS256', 'kid' => GALMGR_ROOM_AUTH_KID ],$payload,$secret);	
 		
 		return $roomUrl . "?token=" . $token;
 	}		
@@ -143,14 +143,14 @@ class Gal_util {
 	}
 	
 	public static function random_name($for_surname =false) {
-		require_once "random-name-generator/randomNameGenerator.php";
+		require_once "random-name-generator/class-galmgr-name-generator.php";
 		if($for_surname) {
-			$r = new randomNameGenerator('array');
+			$r = new Galmgr_name_generator('array');
 			$names = $r->generateNames(1);
 			return $names[0];
 		}
 		else {
-			$r = new randomNameGenerator('associative_array');
+			$r = new Galmgr_name_generator('associative_array');
 			$names = $r->generateNames(1);
 			return $names[0]['first_name'];
 		}

@@ -10,3 +10,4 @@ composer.lock
 composer.json
 .unotes
 languages/*.*~
+data/galmgr-bfk.php

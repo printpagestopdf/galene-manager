@@ -3,7 +3,7 @@
  * Plugin Name: Manager for Galène videoconference
  * Plugin URI: https://github.com/printpagestopdf/galene-manager
  * Description: Management system for the Galène videoconferencing server
- * Text Domain: galene-mgr
+ * Text Domain: manager-for-galene-videoconference
  * Domain Path: /languages/
  * Version: 0.5.0
  * Author: The Ripper
@@ -44,25 +44,25 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once 'includes/class-gal-util.php';
+require_once 'includes/class-galmgr-util.php';
 
 // Define the plugin version.
-define( 'GALENE_PLUGIN_VERSION', 0.5 );
-define( 'GALENE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'GALENE_PLUGIN_URL', plugins_url('', __FILE__ ) );
-define( 'GALENE_DB_DRIVER', GALENE_PLUGIN_PATH. 'includes/class-gal-db-driver.php');
-define( 'GALENE_DEF_BFK','WGVTmmsVy,ylh3jqnQqhu*9W/bHq#/TP');
-define( 'GALENE_WP_ROLE_TYPE',1);
-define( 'GALENE_WP_ROLE_NAME','galene_mgr');
-define( 'GALENE_WP_ROLE_DISPLAYNAME','GaleneManager');
-define( 'GALENE_ROOM_AUTH_KID','gmgr2023');
+define( 'GALMGR_PLUGIN_VERSION', 0.5 );
+define( 'GALMGR_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'GALMGR_PLUGIN_URL', plugins_url('', __FILE__ ) );
+define( 'GALMGR_DB_DRIVER', GALMGR_PLUGIN_PATH. 'includes/class-galmgr-db-driver.php');
+define( 'GALMGR_DEF_BFK','WGVTmmsVy,ylh3jqnQqhu*9W/bHq#/TP');
+define( 'GALMGR_WP_ROLE_TYPE',1);
+define( 'GALMGR_WP_ROLE_NAME','galene_mgr');
+define( 'GALMGR_WP_ROLE_DISPLAYNAME','GaleneManager');
+define( 'GALMGR_ROOM_AUTH_KID','gmgr2023');
 
 
 register_activation_hook( __FILE__, function() {
 	global $wpdb;
 	
-	if(!file_exists(__DIR__ . '/data/bfk.php'))
-		file_put_contents(__DIR__ . '/data/bfk.php','<?php return base64_decode("' . base64_encode(random_bytes(32)) . '");' );
+	if(!file_exists(__DIR__ . '/data/galmgr-bfk.php'))
+		file_put_contents(__DIR__ . '/data/galmgr-bfk.php','<?php return base64_decode("' . base64_encode(random_bytes(32)) . '");' );
 	
 	
 	$charset_collate = $wpdb->get_charset_collate();
@@ -125,13 +125,13 @@ register_activation_hook( __FILE__, function() {
 	// error_log(print_r($res,true));
 	
 	//Add WP galene admin Role
-	add_role(GALENE_WP_ROLE_NAME,GALENE_WP_ROLE_DISPLAYNAME);
+	add_role(GALMGR_WP_ROLE_NAME,GALMGR_WP_ROLE_DISPLAYNAME);
 
-	require_once GALENE_DB_DRIVER;
+	require_once GALMGR_DB_DRIVER;
 
 	/* install app admin if no users exists */
-	if(count(Gal_DB_Driver::inst()->get_users()) == 0) {
-		Gal_DB_Driver::inst()->insert_user(array(
+	if(count(Galmgr_DB_Driver::inst()->get_users()) == 0) {
+		Galmgr_DB_Driver::inst()->insert_user(array(
 			'displayName' => 'Galene Administrator',
 			'login' => 'galene_admin',
 			'password' => password_hash('galene', PASSWORD_DEFAULT),
@@ -141,13 +141,13 @@ register_activation_hook( __FILE__, function() {
 	}
 
 	/* add Wordpress roles to user Table */
-	Gal_DB_Driver::inst()->sync_wp_roles();
+	Galmgr_DB_Driver::inst()->sync_wp_roles();
  
 } );
 
 add_action('init', function() {
 	// switch_to_locale('en_US');
-	load_plugin_textdomain( 'galene-mgr', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'manager-for-galene-videoconference', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	
 	if(strpos(@$_REQUEST['galene_action']?:'', 'admin_') === 0) {
 		session_name("PHPSESSID_GALENE");
@@ -159,20 +159,20 @@ add_action('init', function() {
 			session_write_close();		
 	}
 	
-    wp_register_script( 'galene_js', plugins_url('/js/galene.js', __FILE__), ["jquery"] );
-    wp_register_style( 'galene_fw_style', plugins_url('/css/bulma.min.css', __FILE__));
-    wp_register_style( 'galene_fw_list_style', plugins_url('/css/bulma-list.min.css', __FILE__),['galene_fw_style']);
-    // wp_register_style( 'galene_fw_cc_style', plugins_url('/css/bulma-radio-checkbox.min.css', __FILE__),['galene_fw_style']);
-    wp_register_style( 'galene_fw_cc_style', plugins_url('/css/bulma-checkradio.min.css', __FILE__),['galene_fw_style']);
-    wp_register_style( 'galene_style', plugins_url('/css/galene.css', __FILE__), ["galene_fw_style"]);
+    wp_register_script( 'galmgr_js', plugins_url('/js/galmgr-main.js', __FILE__), ["jquery"] );
+    wp_register_style( 'galmgr_fw_style', plugins_url('/css/bulma.min.css', __FILE__));
+    wp_register_style( 'galmgr_fw_list_style', plugins_url('/css/bulma-list.min.css', __FILE__),['galmgr_fw_style']);
+    // wp_register_style( 'galmgr_fw_cc_style', plugins_url('/css/bulma-radio-checkbox.min.css', __FILE__),['galmgr_fw_style']);
+    wp_register_style( 'galmgr_fw_cc_style', plugins_url('/css/bulma-checkradio.min.css', __FILE__),['galmgr_fw_style']);
+    wp_register_style( 'galmgr_style', plugins_url('/css/style-galmgr.css', __FILE__), ["galmgr_fw_style"]);
 
 
 	add_action('update_option_' . wp_roles()->role_key,function($old_value,  $value,  $option){
-		require_once GALENE_DB_DRIVER;
-		Gal_DB_Driver::inst()->sync_wp_roles($value);	
+		require_once GALMGR_DB_DRIVER;
+		Galmgr_DB_Driver::inst()->sync_wp_roles($value);	
 	},10,3);
 });
 
-require_once 'includes/class-gal-shortcode.php';
-require_once 'includes/class-gal-template-registrar.php';
+require_once 'includes/class-galmgr-shortcode.php';
+require_once 'includes/class-galmgr-template-registrar.php';
 

@@ -1,6 +1,6 @@
 <?php
 
-class randomNameGenerator {
+class Galmgr_name_generator {
 
 	private $version;
 	public $allowedFormats;

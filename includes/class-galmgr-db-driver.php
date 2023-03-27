@@ -1,6 +1,6 @@
 <?php
 
-class Gal_DB_Driver {
+class Galmgr_DB_Driver {
 	private static $_instace=null;
 
 	public function __construct() {
@@ -48,7 +48,7 @@ class Gal_DB_Driver {
 	{
 		switch(get_class($obj))
 		{
-			case "Gal_Room":
+			case "Galmgr_Room":
 				$rooms=array();
 				$rooms[]=$this->get_record_by_id("galene_room",$obj->id);
 				$rooms=$this->expand_room_records($rooms);
@@ -68,7 +68,7 @@ class Gal_DB_Driver {
 	{
 		switch(get_class($obj))
 		{
-			case "Gal_Room":
+			case "Galmgr_Room":
 
 				if(empty(@$obj->id) || $obj->id < 0)
 				{
@@ -211,7 +211,7 @@ class Gal_DB_Driver {
 			ON u.id = a.user_id	WHERE a.room_id = %d AND u.type = %d AND a.{$role} = 1;
 SQL;
 
-		$prepSql=$wpdb->prepare($sql,$roomID,GALENE_WP_ROLE_TYPE);
+		$prepSql=$wpdb->prepare($sql,$roomID,GALMGR_WP_ROLE_TYPE);
 		$dbRoles=$wpdb->get_results($prepSql, OBJECT_K);
 		
 		$dbRolesID=array_keys($dbRoles);
@@ -234,7 +234,7 @@ SQL;
 			else
 				$wpRoles=wp_roles()->get_names();
 
-			$sql=$wpdb->prepare("SELECT login,id from {$userTable} WHERE type = %d;",GALENE_WP_ROLE_TYPE);
+			$sql=$wpdb->prepare("SELECT login,id from {$userTable} WHERE type = %d;",GALMGR_WP_ROLE_TYPE);
 			$dbRoles=$wpdb->get_results($sql,OBJECT_K);
 
 			$wpRolesID=array_keys($wpRoles);

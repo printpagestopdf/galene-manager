@@ -3,17 +3,17 @@
 {% block content %}
 <nav class="panel">
   <div class="panel-heading">
-    <div class="is-hidden-tablet">{{ __("Public rooms",'galene-mgr') }}</div>
+    <div class="is-hidden-tablet">{{ __("Public rooms",'manager-for-galene-videoconference') }}</div>
 
 		<div class="columns is-size-6 is-hidden-mobile" >
 			<div class="column  is-cursor-default">
-					{{__("Room",'galene-mgr') }}
+					{{__("Room",'manager-for-galene-videoconference') }}
 			</div>
 			<div class="column  is-cursor-default">
-				{{ __("Description",'galene-mgr') }}
+				{{ __("Description",'manager-for-galene-videoconference') }}
 			</div>
 			<div class="column has-text-centered is-cursor-default is-multiline is-one-third-desktop is-one-fifth-tablet">
-				{{ __("Access room as ...",'galene-mgr') }}
+				{{ __("Access room as ...",'manager-for-galene-videoconference') }}
 			</div>
 		</div>
 	
@@ -31,18 +31,18 @@
 		  </div>
 		  <div class="column columns is-multiline is-one-third-desktop is-one-fifth-tablet">
 			  <div class="column  py-1-mobile">
-				  <a class="is-underlined" href='{{ $room->urls['recipient'] }}' >
-					{{ __("Listener",'galene-mgr') }}
+				  <a class="is-underlined" href='{% echo esc_url( $room->urls['recipient']) %}' >
+					{{ __("Listener",'manager-for-galene-videoconference') }}
 				  </a>			  
 			  </div>
 			  <div class="column py-1-mobile">
-				  <a class="is-underlined" href='{{ $room->urls['presenter'] }}' >
-					{{ __("Presenter",'galene-mgr') }}
+				  <a class="is-underlined" href='{% echo esc_url($room->urls['presenter']) %}' >
+					{{ __("Presenter",'manager-for-galene-videoconference') }}
 				  </a>			  			  
 			  </div>
 			  <div class="column py-1-mobile">
-				  <a class="is-underlined" href='{{ $room->urls['admin'] }}' >
-					{{ __("Operator",'galene-mgr') }}
+				  <a class="is-underlined" href='{% echo esc_url( $room->urls['admin']) %}' >
+					{{ __("Operator",'manager-for-galene-videoconference') }}
 				  </a>			  			  
 			  </div>
 		  </div>

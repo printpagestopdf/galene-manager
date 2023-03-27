@@ -3,26 +3,26 @@
 {% block content %}
 <nav class="panel">
 	<p class="panel-heading">
-		{{ __("Login administration",'galene-mgr') }}
+		{{ __("Login administration",'manager-for-galene-videoconference') }}
 	</p>
 
 	<form method="POST" class="box is-flex-grow-1">
 		{% wp_nonce_field("admin_auth","gal_form_id",false,true) %}
-		<input type="hidden" name='galene_action' value="{{ @$action }}" >
+		<input type="hidden" name='galene_action' value="{{{ @$action }}}" >
 		<div class="field">
-			<label class="label">{{ __("Login name",'galene-mgr') }}</label>
+			<label class="label">{{ __("Login name",'manager-for-galene-videoconference') }}</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="{{ __("Login name",'galene-mgr') }}" name="galene_login" id="galene_login" required="required" value="{{ @$presets['galene_user'] }}">
+				<input class="input" type="text" placeholder="{{{ __("Login name",'manager-for-galene-videoconference') }}}" name="galene_login" id="galene_login" required="required" value="{{{ @$presets['galene_user'] }}}">
 			</div>
 		</div>
 		<div class="field">
-			<label class="label">{{ __("Password",'galene-mgr') }}</label>
+			<label class="label">{{ __("Password",'manager-for-galene-videoconference') }}</label>
 			<div class="control">
-				<input class="input" type="password" placeholder="{{ __("Password",'galene-mgr') }}" name="galene_password" id="galene_password" required="required"  value="{{ @$presets['galene_password'] }}">
+				<input class="input" type="password" placeholder="{{{ __("Password",'manager-for-galene-videoconference') }}}" name="galene_password" id="galene_password" required="required"  value="{{{ @$presets['galene_password'] }}}">
 			</div>
 		</div>
 		<div class="field">
-			<button class="button is-info" type="submit">{{ __("Next",'galene-mgr') }}</button>
+			<button class="button is-info" type="submit">{{ __("Next",'manager-for-galene-videoconference') }}</button>
 		</div>
 	</form>
 

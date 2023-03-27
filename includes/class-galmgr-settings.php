@@ -2,10 +2,10 @@
 
 use phpseclib3\Crypt\Blowfish;
 
-require_once GALENE_DB_DRIVER;
+require_once GALMGR_DB_DRIVER;
 
 
-class Gal_Settings {
+class Galmgr_Settings {
 	
 	private static $instance = null;
 
@@ -25,32 +25,32 @@ class Gal_Settings {
 	{
 		
 		$da=(!empty(@$args['direct_server_access']) == 'sftp')?$args['direct_server_access']:null;
-		$res=Gal_DB_Driver::inst()->upsert_setting('direct_server_access',null,$da, 'none');
+		$res=Galmgr_DB_Driver::inst()->upsert_setting('direct_server_access',null,$da, 'none');
 		
 		if(array_key_exists('sftp',$args))
 		{
 			if(!empty(@$args['sftp']['password_new']) && $args['sftp']['password_new'] == @$args['sftp']['password_repeat'])
-				$res=Gal_DB_Driver::inst()->upsert_setting('sftp_password',self::blowfish_crypt($args['sftp']['password_new']),"password", "raw");	
+				$res=Galmgr_DB_Driver::inst()->upsert_setting('sftp_password',self::blowfish_crypt($args['sftp']['password_new']),"password", "raw");	
 			
 			if(!empty(@$args['sftp']['key_password_new']) && $args['sftp']['key_password_new'] == @$args['sftp']['key_password_repeat'])
-				$res=Gal_DB_Driver::inst()->upsert_setting('sftp_password',self::blowfish_crypt($args['sftp']['key_password_new']),"key_password", "raw");	
+				$res=Galmgr_DB_Driver::inst()->upsert_setting('sftp_password',self::blowfish_crypt($args['sftp']['key_password_new']),"key_password", "raw");	
 			
 			unset($args['sftp']['password_new']);
 			unset($args['sftp']['password_repeat']);
 			unset($args['sftp']['key_password_new']);
 			unset($args['sftp']['key_password_repeat']);
 
-			$res=Gal_DB_Driver::inst()->upsert_setting('sftp',$args['sftp'],null, null);
+			$res=Galmgr_DB_Driver::inst()->upsert_setting('sftp',$args['sftp'],null, null);
 		}
 		
 		if(array_key_exists('filesystem',$args))
 		{
-			$res=Gal_DB_Driver::inst()->upsert_setting('filesystem',$args['filesystem'],null, null);			
+			$res=Galmgr_DB_Driver::inst()->upsert_setting('filesystem',$args['filesystem'],null, null);			
 		}
 
 		if(array_key_exists('general',$args))
 		{
-			$res=Gal_DB_Driver::inst()->upsert_setting('general',$args['general'],null, null);			
+			$res=Galmgr_DB_Driver::inst()->upsert_setting('general',$args['general'],null, null);			
 		}
 
 		if(array_key_exists('sftp-keyfile',$_FILES) && file_exists($_FILES["sftp-keyfile"]["tmp_name"]))
@@ -58,7 +58,7 @@ class Gal_Settings {
 			$pubkey=file_get_contents($_FILES["sftp-keyfile"]["tmp_name"]);
 			$pubkey_enc=self::blowfish_crypt($pubkey);
 			
-			$res=Gal_DB_Driver::inst()->upsert_setting('sftp_pubkey',$pubkey_enc,null, 'raw');
+			$res=Galmgr_DB_Driver::inst()->upsert_setting('sftp_pubkey',$pubkey_enc,null, 'raw');
 		}
 		
 		return $res;
@@ -66,7 +66,7 @@ class Gal_Settings {
 	
 	public function get_settings()
 	{
-		$recs= Gal_DB_Driver::inst()->get_all_settings();
+		$recs= Galmgr_DB_Driver::inst()->get_all_settings();
 
 		$sftp_password=null;
 		$result=array();
@@ -101,14 +101,14 @@ class Gal_Settings {
 	
 	public function get_setting($key)
 	{
-		$rec=Gal_DB_Driver::inst()->get_setting($key);
+		$rec=Galmgr_DB_Driver::inst()->get_setting($key);
 		
 		if(empty($rec['type']))
 		{
 			$result=json_decode($rec['data'],true);
 			
 			if($key == 'sftp') {
-				$sftp_password=Gal_DB_Driver::inst()->get_setting('sftp_password');
+				$sftp_password=Galmgr_DB_Driver::inst()->get_setting('sftp_password');
 				$result[$sftp_password['setting_subkey']]=self::blowfish_crypt($sftp_password['data'],true);
 			}
 		}
@@ -153,10 +153,10 @@ class Gal_Settings {
 	
 	public static function get_blk()
 	{
-		if(file_exists(GALENE_PLUGIN_PATH . 'data/bfk.php'))
-			return include GALENE_PLUGIN_PATH . 'data/bfk.php';
+		if(file_exists(GALMGR_PLUGIN_PATH . 'data/galmgr-bfk.php'))
+			return include GALMGR_PLUGIN_PATH . 'data/galmgr-bfk.php';
 		else
-			return GALENE_DEF_BFK;
+			return GALMGR_DEF_BFK;
 		
 	}
 	
