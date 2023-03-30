@@ -2,7 +2,7 @@
 Contributors: theripper
 Tags: videoconference, lectures, conferences, meetings
 Requires at least: 4.7
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.4
 Stable tag: 0.5.0
 License: GPLv3 or later
@@ -52,6 +52,10 @@ Case 1. or 2. are set up by this tab. If you set up one of these, the syncroniza
 
 (The export and import of .json room (group) configuration files can be done by the Server tab of the <strong>Room settings</strong>.)
 
+Important: If SFTP access is used it is possible to save the credentials in the Database of the Plugin. To ensure that this data is encrypted, it is advised to add an encryption key to wp-config.php with the following setting:
+`define( 'GALMGR_CRYPT_KEY', 'TapaWrJuFy1KpSxfzKzN1Nx07MgdTGV0BakcNcEg/V4=' );`
+You can easily get a random crypt key by opening the settings Form. In the SFTP part you will find a randomly generated key.
+
 ## Room settings
 
 (<em>groups</em> in Galène terminology)
@@ -87,10 +91,10 @@ None
 
 == Screenshots ==
 
-1. Room dialog.
-2. Room users access settings.
-3. System settings.
-4. User settings.
+1. Public rooms list.
+2. Room settings form.
+3. User access list of room.
+4. System settings (sftp access).
 
 == Frequently Asked Questions ==
 

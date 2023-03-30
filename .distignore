@@ -28,8 +28,7 @@ node_modules
 *.sql
 *.tar.gz
 *.zip
-data/galmgr-bfk.php
 languages/*.*~
-/.wordpress-org
-/.git
-/.github
+.wordpress-org
+.git
+.github

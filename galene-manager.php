@@ -9,7 +9,7 @@
  * Author: The Ripper
  * Author URI: https://profiles.wordpress.org/theripper
  * Requires at least: 4.7
- * Tested up to: 6.1
+ * Tested up to: 6.2
  * Requires PHP: 7.4
  * License: GPLv3 or later
  *
@@ -51,7 +51,6 @@ define( 'GALMGR_PLUGIN_VERSION', 0.5 );
 define( 'GALMGR_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GALMGR_PLUGIN_URL', plugins_url('', __FILE__ ) );
 define( 'GALMGR_DB_DRIVER', GALMGR_PLUGIN_PATH. 'includes/class-galmgr-db-driver.php');
-define( 'GALMGR_DEF_BFK','WGVTmmsVy,ylh3jqnQqhu*9W/bHq#/TP');
 define( 'GALMGR_WP_ROLE_TYPE',1);
 define( 'GALMGR_WP_ROLE_NAME','galene_mgr');
 define( 'GALMGR_WP_ROLE_DISPLAYNAME','GaleneManager');
@@ -59,11 +58,7 @@ define( 'GALMGR_ROOM_AUTH_KID','gmgr2023');
 
 
 register_activation_hook( __FILE__, function() {
-	global $wpdb;
-	
-	if(!file_exists(__DIR__ . '/data/galmgr-bfk.php'))
-		file_put_contents(__DIR__ . '/data/galmgr-bfk.php','<?php return base64_decode("' . base64_encode(random_bytes(32)) . '");' );
-	
+	global $wpdb;	
 	
 	$charset_collate = $wpdb->get_charset_collate();
 	$user_table_name = $wpdb->prefix . 'galene_user';

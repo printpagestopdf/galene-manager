@@ -132,10 +132,12 @@ class Galmgr_Settings {
 		
 	public static function blowfish_crypt($data,$decrypt=false)
 	{
-
+		if (!defined('GALMGR_CRYPT_KEY')) {
+			return $data;
+		}
 		$bf = new Blowfish('ecb');
 		// $blowfish =new \phpseclib3\Crypt\Blowfish('ctr');
-		$bf->setKey(self::get_blk());
+		$bf->setKey(base64_decode(GALMGR_CRYPT_KEY));
 
 		if($decrypt)
 		{
@@ -150,14 +152,5 @@ class Galmgr_Settings {
 		
 		
 	}
-	
-	public static function get_blk()
-	{
-		if(file_exists(GALMGR_PLUGIN_PATH . 'data/galmgr-bfk.php'))
-			return include GALMGR_PLUGIN_PATH . 'data/galmgr-bfk.php';
-		else
-			return GALMGR_DEF_BFK;
 		
-	}
-	
 }

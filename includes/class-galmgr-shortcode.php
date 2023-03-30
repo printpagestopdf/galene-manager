@@ -509,7 +509,12 @@ class Galmgr_Shortcode {
 				
 			case "admin_test_galene_access":
 				ob_clean();
-				$result=Galmgr_Server::inst()->test_connection();
+				try {
+					$result=Galmgr_Server::inst()->test_connection();
+				}
+				catch( \Throwable $ex) {
+					$result=array( array("ERROR",$ex->getMessage()));
+				}
 				echo <<< HEAD
 				<html>
 				<head>
