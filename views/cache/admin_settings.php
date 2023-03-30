@@ -206,6 +206,14 @@
 				</div>
 				<hr />
 				<h5 class="title is-5"><?php echo esc_html(__("Authentication",'manager-for-galene-videoconference')) ?></h5>
+				<?php if (!defined('GALMGR_CRYPT_KEY')): ?>
+					<div class="box">
+							<?php echo esc_html(__("If you are using SFTP access, authentication data is stored in database. It is strongly advised to encrypt these.",'manager-for-galene-videoconference')) ?>
+							&#32;<?php echo esc_html(__("Ask your Worpress administrator to add this line to wp-config.php before saving this form:",'manager-for-galene-videoconference')) ?><br>
+							<code data-select-link-text="1" class="has-text-black-bis is-family-monospace"><?php echo esc_html("define( 'GALMGR_CRYPT_KEY', '" .  base64_encode(random_bytes(32))  . "' );") ?></code>
+					</div>
+				<?php endif; ?>
+
 					<div class="field">
 					  <label class="label"><?php echo esc_html(__("Username",'manager-for-galene-videoconference')) ?></label>
 					  <div class="control">

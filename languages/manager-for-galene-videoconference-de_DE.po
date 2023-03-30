@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Galène for WP\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-03 10:47+0000\n"
-"PO-Revision-Date: 2023-03-27 17:11+0000\n"
+"PO-Revision-Date: 2023-03-30 15:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -42,6 +42,14 @@ msgstr "Aufnahme der Session erlauben"
 msgid "Allow subgroups"
 msgstr "Untergruppen erlauben"
 
+#: views/cache/admin_settings.php:212 views/admin_settings.twig:144
+msgid ""
+"Ask your Worpress administrator to add this line to wp-config.php before "
+"saving this form:"
+msgstr ""
+"Bitten sie ihren Wordpress Administrator diese Zeile zur Datei wp-config.php "
+"hinzuzufügen bevor sie das Formular speichern:"
+
 #: views/cache/admin_roomedit.php:158 views/admin_roomedit.twig:90
 msgid "Attendance as listener"
 msgstr "Teilnahme als Zuhörer*in"
@@ -70,9 +78,9 @@ msgstr "Authentisierung notwendig für:"
 msgid "Auto room locking"
 msgstr "Autom. Raumsperre"
 
-#: views/cache/admin_roomedit.php:356 views/cache/admin_settings.php:326
+#: views/cache/admin_roomedit.php:356 views/cache/admin_settings.php:334
 #: views/cache/admin_useredit.php:133 views/cache/admin_userselect.php:118
-#: views/admin_roomedit.twig:288 views/admin_settings.twig:258
+#: views/admin_roomedit.twig:288 views/admin_settings.twig:266
 #: views/admin_useredit.twig:65 views/admin_userselect.twig:117
 msgid "Cancel"
 msgstr "Abbruch"
@@ -112,17 +120,21 @@ msgstr "Neuen Raum basierend auf Vorlage erstellen"
 msgid "Create a new user configuration"
 msgstr "Eine neue Benutzer*in anlegen"
 
-#: includes/class-gal-shortcode.php:136 includes/class-gal-shortcode.php:159
-#: includes/class-gal-shortcode.php:187 includes/class-gal-shortcode.php:562
+#: includes/class-galmgr-shortcode.php:136
+#: includes/class-galmgr-shortcode.php:159
+#: includes/class-galmgr-shortcode.php:187
+#: includes/class-galmgr-shortcode.php:566
 msgid "Data error"
 msgstr "Fehler in den Daten"
 
-#: includes/class-gal-shortcode.php:363
+#: includes/class-galmgr-shortcode.php:362
 msgid "Data succesfully saved on Galène server"
 msgstr "Daten erfolgreich auf dem Galène Server gespeichert"
 
-#: includes/class-gal-shortcode.php:354 includes/class-gal-shortcode.php:449
-#: includes/class-gal-shortcode.php:473 includes/class-gal-shortcode.php:507
+#: includes/class-galmgr-shortcode.php:353
+#: includes/class-galmgr-shortcode.php:448
+#: includes/class-galmgr-shortcode.php:472
+#: includes/class-galmgr-shortcode.php:506
 msgid "Data successfully saved"
 msgstr "Daten erfolgreich gespeichert"
 
@@ -147,7 +159,7 @@ msgstr "Direkter Dateisystem Zugriff"
 msgid "Display name"
 msgstr "Anzeigename"
 
-#: includes/class-gal-room.php:140
+#: includes/class-galmgr-room.php:140
 msgid "Display name must not be empty"
 msgstr "Anzeigename darf nicht leer sein"
 
@@ -194,27 +206,28 @@ msgstr "Benutzer*in bearbeiten"
 msgid "Enter Room '%1s' as '%2s'"
 msgstr "Raum '%1s' als '%2s' betreten"
 
-#: includes/class-gal-shortcode.php:391
+#: includes/class-galmgr-shortcode.php:390
 msgid "Error deleting room config from Galène server"
 msgstr "Fehler beim löschen der Raumkonfiguration vom Galène Server"
 
-#: includes/class-gal-shortcode.php:394
+#: includes/class-galmgr-shortcode.php:393
 msgid "Error deleting room from manager Database"
 msgstr "Feler beim löschen des Raumes aus der Manager Datenbank"
 
-#: includes/class-gal-shortcode.php:412
+#: includes/class-galmgr-shortcode.php:411
 msgid "Error deleting user from Database"
 msgstr "Fehler beim Versuche die Benutzer*in aus der Datenbank zu löschen!"
 
-#: includes/class-gal-shortcode.php:142 includes/class-gal-shortcode.php:222
+#: includes/class-galmgr-shortcode.php:142
+#: includes/class-galmgr-shortcode.php:222
 msgid "Error in login data"
 msgstr "Fehler in den Anmeldedaten"
 
-#: includes/class-gal-shortcode.php:365
+#: includes/class-galmgr-shortcode.php:364
 msgid "Error saving data on Galène server"
 msgstr "Fehler beim Speichern der Daten auf dem Galène Server"
 
-#: includes/class-gal-room.php:72 includes/class-gal-shortcode.php:371
+#: includes/class-galmgr-room.php:72 includes/class-galmgr-shortcode.php:370
 msgid "Error saving Data, nothing saved!"
 msgstr "Fehler beim Speichern"
 
@@ -226,7 +239,7 @@ msgstr "Serverdatei exportieren"
 msgid "Full path to Galène group directory"
 msgstr "Voller Dateisystempfad zum Galène group Verzeichnis"
 
-#: includes/class-gal-room.php:143
+#: includes/class-galmgr-room.php:143
 msgid "Galène group must not be empty"
 msgstr "Galène Gruppe darf nicht leer sein"
 
@@ -243,7 +256,7 @@ msgstr "Galène Schlüssel"
 msgid "Galène link without name of room (e.g. https://mygalene.org/group/)"
 msgstr "Galène Link ohne den Raumnamen (z.B. https://mygalene.org/group/)"
 
-#: includes/class-gal-template-registrar.php:70
+#: includes/class-galmgr-template-registrar.php:70
 msgid "Galène video conferencing manager"
 msgstr "Galène Videokonferenz Manager"
 
@@ -285,6 +298,15 @@ msgstr "Benutzer*in kann sich am Galène Manager anmelden und Verwalten"
 msgid "If checked, this room will be visible on the public rooms listing"
 msgstr "Raum auf der öffentlichen Liste anzeigen"
 
+#: views/cache/admin_settings.php:211 views/admin_settings.twig:143
+msgid ""
+"If you are using SFTP access, authentication data is stored in database. It "
+"is strongly advised to encrypt these."
+msgstr ""
+"Wenn sie mit SFTP auf den Server zugreifen werden Authentisierungsdaten in "
+"der Datenbank gespeichert. Es wird dringendst empfohlen diese zu "
+"verschlüsseln."
+
 #: views/cache/admin_roomedit.php:273 views/admin_roomedit.twig:205
 msgid "Import serverfile"
 msgstr "Galène Serverdatei importieren"
@@ -325,7 +347,7 @@ msgstr "Link für Operator*innen"
 msgid "Link for presenter"
 msgstr "Link für Präsentator*innen"
 
-#: includes/class-gal-shortcode.php:77 views/cache/admin_roomedit.php:222
+#: includes/class-galmgr-shortcode.php:77 views/cache/admin_roomedit.php:222
 #: views/cache/admin_userselect.php:27 views/cache/roomlist.php:103
 #: views/admin_roomedit.twig:154 views/admin_userselect.twig:26
 #: views/roomlist.twig:35
@@ -357,7 +379,7 @@ msgstr "Passwort nur eintragen bei neuen Benutzer*innen oder Passwortänderung"
 msgid "Loginname"
 msgstr "Loginname"
 
-#: views/cache/admin_settings.php:214 views/admin_settings.twig:146
+#: views/cache/admin_settings.php:222 views/admin_settings.twig:154
 msgid "Loginname at Galène Server for SSH/SFTP access"
 msgstr "Anmeldename am Galène Server für SSH/SFTP Zugang"
 
@@ -384,11 +406,11 @@ msgstr "Verwaltung für Galène Video Konferenz"
 msgid "Max. attendees"
 msgstr "Max. Teilnehmerzahl"
 
-#: views/cache/admin_settings.php:217 views/admin_settings.twig:149
+#: views/cache/admin_settings.php:225 views/admin_settings.twig:157
 msgid "Method of authentication"
 msgstr "Authentisierungsmethode"
 
-#: includes/class-gal-room.php:141
+#: includes/class-galmgr-room.php:141
 msgid "Missing valid Galène key"
 msgstr "Fehlender Galène Key"
 
@@ -423,7 +445,7 @@ msgstr "Weiter"
 msgid "no name"
 msgstr "kein Name"
 
-#: includes/class-gal-shortcode.php:73 views/cache/admin_roomedit.php:220
+#: includes/class-galmgr-shortcode.php:73 views/cache/admin_roomedit.php:220
 #: views/cache/admin_userselect.php:25 views/cache/roomlist.php:113
 #: views/admin_roomedit.twig:152 views/admin_userselect.twig:24
 #: views/roomlist.twig:45
@@ -439,30 +461,30 @@ msgid "Otherwise random name will be generated"
 msgstr "Andernfalls wird ein zufälliger Name erzeugt"
 
 #: views/cache/admin_auth.php:87 views/cache/admin_auth.php:89
-#: views/cache/admin_settings.php:229 views/cache/admin_settings.php:282
+#: views/cache/admin_settings.php:237 views/cache/admin_settings.php:290
 #: views/cache/admin_useredit.php:98 views/cache/user_auth.php:103
-#: views/admin_auth.twig:19 views/admin_settings.twig:161
-#: views/admin_settings.twig:214 views/admin_useredit.twig:30
+#: views/admin_auth.twig:19 views/admin_settings.twig:169
+#: views/admin_settings.twig:222 views/admin_useredit.twig:30
 #: views/user_auth.twig:35
 msgid "Password"
 msgstr "Passwort"
 
-#: views/cache/admin_settings.php:237 views/cache/admin_settings.php:290
+#: views/cache/admin_settings.php:245 views/cache/admin_settings.php:298
 #: views/cache/admin_useredit.php:106 views/cache/admin_useredit.php:110
-#: views/admin_settings.twig:169 views/admin_settings.twig:222
+#: views/admin_settings.twig:177 views/admin_settings.twig:230
 #: views/admin_useredit.twig:38 views/admin_useredit.twig:42
 msgid "Password (repeat)"
 msgstr "Passwortwiederholung"
 
-#: views/cache/admin_settings.php:233 views/admin_settings.twig:165
+#: views/cache/admin_settings.php:241 views/admin_settings.twig:173
 msgid "Password at Galène Server for SSH/SFTP access"
 msgstr "Passwort für SSH/SFTP Zugriff auf Galène Server"
 
-#: views/cache/admin_settings.php:286 views/admin_settings.twig:218
+#: views/cache/admin_settings.php:294 views/admin_settings.twig:226
 msgid "Password for the private key file"
 msgstr "Passwort für die \"private key\" Datei"
 
-#: includes/class-gal-shortcode.php:430
+#: includes/class-galmgr-shortcode.php:429
 msgid "Password repeat does not match Password"
 msgstr "Passwortwiederholung entspricht nicht dem Passwort"
 
@@ -478,8 +500,8 @@ msgstr "Raum endgültig löschen"
 msgid "Permanently delete this user"
 msgstr "Benutzer*in endgültig löschen"
 
-#: views/cache/admin_settings.php:153 views/cache/admin_settings.php:307
-#: views/admin_settings.twig:85 views/admin_settings.twig:239
+#: views/cache/admin_settings.php:153 views/cache/admin_settings.php:315
+#: views/admin_settings.twig:85 views/admin_settings.twig:247
 msgid "Please save settings/changes before testing"
 msgstr "Bitte speichern vor dem Testen"
 
@@ -487,14 +509,14 @@ msgstr "Bitte speichern vor dem Testen"
 msgid "Port"
 msgstr "Port"
 
-#: includes/class-gal-shortcode.php:69 views/cache/admin_roomedit.php:221
+#: includes/class-galmgr-shortcode.php:69 views/cache/admin_roomedit.php:221
 #: views/cache/admin_userselect.php:26 views/cache/roomlist.php:108
 #: views/admin_roomedit.twig:153 views/admin_userselect.twig:25
 #: views/roomlist.twig:40
 msgid "Presenter"
 msgstr "Präsentator*in"
 
-#: views/cache/admin_settings.php:277 views/admin_settings.twig:209
+#: views/cache/admin_settings.php:285 views/admin_settings.twig:217
 msgid "Private key is encrypted with password"
 msgstr "Der \"private key\" ist mit Passwort verschlüsselt"
 
@@ -506,12 +528,12 @@ msgstr "Basislink des Galène Servers"
 msgid "Public rooms"
 msgstr "Öffentliche Räume"
 
-#: views/cache/admin_settings.php:252 views/admin_settings.twig:184
+#: views/cache/admin_settings.php:260 views/admin_settings.twig:192
 msgid "Public/Private key authentication"
 msgstr "Public/Private Key Authentisierung"
 
-#: views/cache/admin_settings.php:241 views/cache/admin_settings.php:294
-#: views/admin_settings.twig:173 views/admin_settings.twig:226
+#: views/cache/admin_settings.php:249 views/cache/admin_settings.php:302
+#: views/admin_settings.twig:181 views/admin_settings.twig:234
 msgid "Repeat your password"
 msgstr "Passwort wiederholen"
 
@@ -524,11 +546,11 @@ msgstr "Raum"
 msgid "Room access conditions / Security"
 msgstr "Bedingungen für den Raumzugang / Sicherheit"
 
-#: includes/class-gal-shortcode.php:389
+#: includes/class-galmgr-shortcode.php:388
 msgid "Room config on Galène server successfully deleted"
 msgstr "Raumkonfiguration vom Galène Server gelöscht"
 
-#: includes/class-gal-shortcode.php:387
+#: includes/class-galmgr-shortcode.php:386
 msgid "Room deleted from manager Database"
 msgstr "Raum aus der Manager Datenbank gelöscht"
 
@@ -552,14 +574,14 @@ msgstr "Raum ohne Operator*in automatisch sperren"
 msgid "Rooms"
 msgstr "Räume"
 
-#: views/cache/admin_roomedit.php:351 views/cache/admin_settings.php:321
+#: views/cache/admin_roomedit.php:351 views/cache/admin_settings.php:329
 #: views/cache/admin_useredit.php:128 views/cache/admin_userselect.php:113
-#: views/admin_roomedit.twig:283 views/admin_settings.twig:253
+#: views/admin_roomedit.twig:283 views/admin_settings.twig:261
 #: views/admin_useredit.twig:60 views/admin_userselect.twig:112
 msgid "Save"
 msgstr "Speichern"
 
-#: views/cache/admin_settings.php:266 views/admin_settings.twig:198
+#: views/cache/admin_settings.php:274 views/admin_settings.twig:206
 msgid "Select private key file"
 msgstr "Private Schlüsseldatei auswählen"
 
@@ -617,7 +639,7 @@ msgstr ""
 "werden sollen (um Zeitdifferenz zwischen Galène server und Manager Server "
 "auszugleichen)"
 
-#: includes/class-gal-shortcode.php:409
+#: includes/class-galmgr-shortcode.php:408
 msgid "Successfully deleted user from Database"
 msgstr "Benutzer*in erfolgreich aus der Datenbank gelöscht"
 
@@ -633,7 +655,7 @@ msgstr "Systemeinstellungen"
 msgid "Test access to groups directory"
 msgstr "Zugriff auf das Galène groups Verzeichnis testen"
 
-#: views/cache/admin_settings.php:304 views/admin_settings.twig:236
+#: views/cache/admin_settings.php:312 views/admin_settings.twig:244
 msgid "Test SFTP access"
 msgstr "SFTP Zugriff testen"
 
@@ -641,20 +663,22 @@ msgstr "SFTP Zugriff testen"
 msgid "The Ripper"
 msgstr ""
 
-#: includes/class-gal-shortcode.php:136 includes/class-gal-shortcode.php:159
-#: includes/class-gal-shortcode.php:187 includes/class-gal-shortcode.php:562
+#: includes/class-galmgr-shortcode.php:136
+#: includes/class-galmgr-shortcode.php:159
+#: includes/class-galmgr-shortcode.php:187
+#: includes/class-galmgr-shortcode.php:566
 msgid "There is an error in submitted data"
 msgstr "Die übertragenen Daten sind fehlerhaft"
 
-#: includes/class-gal-room.php:148
+#: includes/class-galmgr-room.php:148
 msgid "This Galène group is already in use: "
 msgstr "Diese Galène group wird bereits verwendet"
 
-#: includes/class-gal-shortcode.php:148
+#: includes/class-galmgr-shortcode.php:148
 msgid "This login is not registered for the requested role"
 msgstr "Dieses Login ist für die erwünschte Rolle nicht registriert"
 
-#: includes/class-gal-shortcode.php:575
+#: includes/class-galmgr-shortcode.php:579
 msgid "This room does not (longer) exist"
 msgstr "Der Raum existiert nicht (mehr)"
 
@@ -662,11 +686,11 @@ msgstr "Der Raum existiert nicht (mehr)"
 msgid "Token lifetime"
 msgstr "Gültigkeitsdauer des JWT Tokens"
 
-#: views/cache/admin_settings.php:255 views/admin_settings.twig:187
+#: views/cache/admin_settings.php:263 views/admin_settings.twig:195
 msgid "Upload keyfile"
 msgstr "Schlüsseldatei hochladen"
 
-#: views/cache/admin_settings.php:271 views/admin_settings.twig:203
+#: views/cache/admin_settings.php:279 views/admin_settings.twig:211
 msgid ""
 "Upload your private key file to this app (RSA, DSA, ECDSA, EdDSA (Ed25519))"
 msgstr ""
@@ -677,11 +701,11 @@ msgstr ""
 msgid "Use <b>Code</b>"
 msgstr "<b>Raumzugangscode</b> verwenden"
 
-#: includes/class-gal-shortcode.php:459
+#: includes/class-galmgr-shortcode.php:458
 msgid "Userlist successfully updated"
 msgstr "Benutzer*innenliste erfolgreich aktualisiert"
 
-#: views/cache/admin_settings.php:210 views/admin_settings.twig:142
+#: views/cache/admin_settings.php:218 views/admin_settings.twig:150
 msgid "Username"
 msgstr "Benutzer*innenname"
 
@@ -689,7 +713,7 @@ msgstr "Benutzer*innenname"
 msgid "Username for authentication"
 msgstr "Benutzer*innenname für Anmeldung"
 
-#: views/cache/admin_settings.php:224 views/admin_settings.twig:156
+#: views/cache/admin_settings.php:232 views/admin_settings.twig:164
 msgid "Username/Password"
 msgstr "Benutzer*innenname/Passwort"
 
@@ -712,6 +736,6 @@ msgstr "Benutzer*innenliste kann erst nach dem Speichern bearbeitet werden"
 msgid "Wordpress Roles"
 msgstr "Wordpress Rollen"
 
-#: includes/class-gal-shortcode.php:165
+#: includes/class-galmgr-shortcode.php:165
 msgid "Wrong code"
 msgstr "Falscher Raumzugangscode"

@@ -1,4 +1,3 @@
-
 # Wordpress Plugin: Manager for Galène videoconference
 
 *"Galène* (or <em>Galene</em>) is a videoconference server (an “[SFU](https://webrtcglossary.com/sfu/)”) that is easy to deploy and that requires moderate server resources. It was originally designed for lectures, conferences and student tutorials, but is also useful for traditional meetings. ... Galène is free and open source software, subject to the [MIT licence](https://github.com/jech/galene/blob/master/LICENCE)." (Detailed information on [Product Page](https://galene.org/) and [Code Repository](https://github.com/jech/galene))
@@ -39,6 +38,10 @@ Case 1. or 2. are set up by this tab. If you set up one of these, the syncroniza
 
 (The export and import of .json room (group) configuration files can be done by the Server tab of the <strong>Room settings</strong>.)
 
+Important: If SFTP access is used it is possible to save the credentials in the Database of the Plugin. To ensure that this data is encrypted, it is advised to add an encryption key to wp-config.php with the following setting:
+`define( 'GALMGR_CRYPT_KEY', 'TapaWrJuFy1KpSxfzKzN1Nx07MgdTGV0BakcNcEg/V4=' );`
+You can easily get a random crypt key by opening the settings Form. In the SFTP part you will find a randomly generated key.
+
 ## Room settings
 
 (<em>groups</em> in Galène terminology)
@@ -71,11 +74,9 @@ By the users dialog users can be added and updated:
 
 # Frequently Asked Questions
 
-
-Q: *The Gutenberg Editor always displays 'Standard Template' if 'Galène video conferencing manager' is chosen as page template* 
+Q: *The Gutenberg Editor always displays 'Standard Template' if 'Galène video conferencing manager' is chosen as page template*
 A: Gutenberg Editor seems to handle page template names differently. Nevertheless, if 'Galène video conferencing manager' page template was choosen and the page successfully saved, this template ist used (independantly from the missleading display).
 Best way is, to use the Quick Edit in page listing to set and control the used template.
 
 Q: *Is it possible to edit the page if page template 'Galène video conferencing manager' is used*
 Yes, the title and the top of page is visible on the resulting page and can freely edited.
-
