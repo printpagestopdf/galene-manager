@@ -3,7 +3,8 @@
 *"Galène* (or <em>Galene</em>) is a videoconference server (an “[SFU](https://webrtcglossary.com/sfu/)”) that is easy to deploy and that requires moderate server resources. It was originally designed for lectures, conferences and student tutorials, but is also useful for traditional meetings. ... Galène is free and open source software, subject to the [MIT licence](https://github.com/jech/galene/blob/master/LICENCE)." (Detailed information on [Product Page](https://galene.org/) and [Code Repository](https://github.com/jech/galene))
 
 Galène does not provide a graphical user interface to manage (create/change/delete) conferencing rooms (groups), dedicated users or access control by a code number. This wordpress plugin is able to fullfill such tasks.
-Prerequisit is a local or remote Galène videoconference server.
+
+<strong>Prerequisit is a local or remote Galène videoconference server.</strong> ([In the docker subdirectory is a Docker demo including a Galène videoserver](#docker_demo))
 
 ## Using the plugin
 
@@ -80,3 +81,11 @@ Best way is, to use the Quick Edit in page listing to set and control the used t
 
 Q: *Is it possible to edit the page if page template 'Galène video conferencing manager' is used*
 Yes, the title and the top of page is visible on the resulting page and can freely edited.
+
+<br>
+# Demo with Docker containers
+
+Inside the projects directory *docker* you will find a docker-compose.yml file to use with docker-compose.
+This starts a demoinstallation that contains a wordpress (6.1) container with the galene manager plugin. A second container starts the image deburau/galene:latest, that is running a Galène video conferencing server.
+The Galène image has minimal configuration (so you will probably not be able to start conferencing with differen anttendees) but is connected to the plugin. (The Galène server is configurable, you will find deeper informations on the creators page [https://github.com/deburau/galene-docker](https://github.com/deburau/galene-docker) )
+The preinstalled wordpress image is based on the official wordpress docker image ([https://hub.docker.com/_/wordpress](https://hub.docker.com/_/wordpress)), so it can although configured by its environment variables (default for this image is: WP\_AUTO\_UPDATE\_CORE: false, WP\_HOME and WP\_SITEURL http://localhost:8888

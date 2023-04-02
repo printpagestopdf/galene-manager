@@ -26,6 +26,7 @@ readme.md
 wp-cli.local.yml
 tests
 node_modules
+docker
 *.sql
 *.tar.gz
 *.zip
