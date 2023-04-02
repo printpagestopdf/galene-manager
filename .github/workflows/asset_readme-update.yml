@@ -14,5 +14,6 @@ jobs:
       uses: 10up/action-wordpress-plugin-asset-update@stable
       env:
         IGNORE_OTHER_FILES: true
+        SLUG: manager-for-galene-videoconference
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
