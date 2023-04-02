@@ -7,7 +7,6 @@ Requires PHP: 7.4
 Stable tag: 0.5.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-
 Management system for a local or remote Galène videoconference server. Manages access for registered users, wordpress roles or by accesscode.
 
 == Description ==
@@ -104,6 +103,9 @@ Best way is, to use the Quick Edit in page listing to set and control the used t
 
 = Is it possible to edit the page if page template 'Galène video conferencing manager' is used =
 Yes, the title and the top of page is visible on the resulting page and can freely edited.
+
+= After installation an error message shows up in 'Settings -> Public base link of Galène Server' =
+This is a missleading message, that this field should not be empty. Add a valid link to the group path of your Galène Server, save it, and the message is not longer shown
 
 == Changelog ==
 = 0.5 =
