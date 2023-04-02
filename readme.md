@@ -82,6 +82,7 @@ Best way is, to use the Quick Edit in page listing to set and control the used t
 Q: *Is it possible to edit the page if page template 'Galène video conferencing manager' is used*
 Yes, the title and the top of page is visible on the resulting page and can freely edited.
 
+<br>
 # Demo with Docker containers
 
 Inside the projects directory *docker* you will find a docker-compose.yml file to use with docker-compose.
