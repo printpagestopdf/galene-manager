@@ -2,7 +2,7 @@
 Contributors: theripper
 Tags: videoconference, lectures, conferences, meetings
 Requires at least: 4.7
-Tested up to: 6.2
+Tested up to: 6.4.3
 Requires PHP: 7.4
 Stable tag: 0.5.0
 License: GPLv3 or later

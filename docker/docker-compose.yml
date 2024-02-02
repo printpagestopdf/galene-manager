@@ -2,7 +2,7 @@ version: '3'
 
 services:
   galenemgr:
-    image: pp2pdf/galenemanager:v1
+    image: pp2pdf/galenemanager:v2
     container_name: galenemanager
     restart: always
     ports:

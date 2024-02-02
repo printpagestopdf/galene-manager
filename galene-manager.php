@@ -9,7 +9,7 @@
  * Author: The Ripper
  * Author URI: https://profiles.wordpress.org/theripper
  * Requires at least: 4.7
- * Tested up to: 6.2
+ * Tested up to: 6.4.3
  * Requires PHP: 7.4
  * License: GPLv3 or later
  *
